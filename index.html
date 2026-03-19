@@ -147,6 +147,13 @@ body{background:var(--bg);color:var(--ink);font-family:'Lexend',sans-serif;font-
 .adhesive-card-body ul li{font-size:13px;color:var(--ink2);padding:5px 0 5px 14px;position:relative;border-bottom:1px solid #f0efe9}
 .adhesive-card-body ul li:last-child{border-bottom:none}
 .adhesive-card-body ul li::before{content:"•";position:absolute;left:0;color:var(--muted)}
+.adhesive-row { display: flex; gap: 24px; margin-bottom: 32px; align-items: stretch; }
+.adhesive-row .slide-fig { flex: 1.1; margin: 0; display: flex; flex-direction: column; }
+.adhesive-row .slide-fig img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; flex: 1; }
+.adhesive-row .adhesive-info { flex: 1; display: flex; flex-direction: column; }
+.adhesive-row .adhesive-card { flex: 1; display: flex; flex-direction: column; height: 100%; }
+.adhesive-row .adhesive-card-body { flex: 1; }
+@media (max-width: 850px) { .adhesive-row { flex-direction: column; } .adhesive-row .slide-fig { flex: none; width: 100%; } }
 .divider{border:none;border-top:1px solid var(--border);margin:36px 0}
 .mob-toggle{display:none;position:fixed;bottom:24px;right:24px;z-index:500;width:48px;height:48px;border-radius:50%;background:var(--red);color:#fff;border:none;font-size:20px;cursor:pointer;box-shadow:0 4px 16px rgba(192,57,43,.4)}
 @media(max-width:900px){
@@ -339,14 +346,18 @@ body{background:var(--bg);color:var(--ink);font-family:'Lexend',sans-serif;font-
 <div class="chapter-num-badge ch2-badge">2</div>
 <div class="chapter-title-block">
 <h2>Ván nhân tạo</h2>
-<p>Ván dăm · Ván sợi MDF · Ván dán — đặc điểm, ưu nhược điểm &amp; ứng dụng</p>
 </div>
 </div>
-<figure class="slide-fig"><img alt="Giới thiệu ván nhân tạo" loading="lazy" src="images/slide_24.jpg"/><figcaption>3 nhóm ván nhân tạo cần nghiên cứu</figcaption></figure>
+<div class="intro-box" style="border-left-color:#2471a3;border-color:#bfdbfe">
+  <strong>Ván nhân tạo</strong> là vật liệu dạng tấm được sản xuất từ nguyên liệu gỗ tái cấu trúc (sợi, dăm hoặc lớp gỗ), liên kết bằng keo dưới áp suất và nhiệt độ, nhằm tạo ra sản phẩm có tính ổn định cao, dễ gia công và phù hợp sản xuất công nghiệp.<br/>
+  Ván nhân tạo chia ra 3 nhóm chính: <strong>Ván dăm, ván sợi và ván dán</strong>.
+</div>
 <div class="section" id="ch21">
 <div class="section-title"><span class="dot blue"></span>2.1 Ván dăm (Particle Board)</div>
 <figure class="slide-fig"><img alt="Ván dăm – đặc điểm" loading="lazy" src="images/slide_25.jpg"/><figcaption>Ván dăm: định nghĩa &amp; đặc điểm</figcaption></figure>
-<div class="intro-box" style="border-left-color:#2471a3;border-color:#bfdbfe"><strong>Ván dăm</strong> là dăm gỗ kết hợp với keo dán qua ép nhiệt tạo thành. Có <strong>3 lớp cơ bản</strong>: 2 lớp ngoài mịn + lớp giữa thô — giúp tăng khả năng uốn và giảm khối lượng.</div>
+<div class="intro-box" style="border-left-color:#2471a3;border-color:#bfdbfe">
+  <strong>Cấu trúc ván dăm:</strong> Về cơ bản, ván dăm có 3 lớp, 2 lớp trên và dưới có cỡ hạt gỗ nhỏ hơn lớp trung gian và mịn hơn. Lớp trung gian có cỡ hạt thô hơn và rỗng. Nó làm tăng khả năng uốn của ván dăm và nhẹ hơn.
+</div>
 <figure class="slide-fig"><img alt="Cấu trúc 3 lớp của ván dăm" loading="lazy" src="images/slide_26.jpg"/><figcaption>Cấu trúc 3 lớp của ván dăm</figcaption></figure>
 <div class="two-col">
 <div class="info-card pro"><div class="info-card-title">✓ Ưu điểm</div><ul><li>Giá thành rẻ</li><li>Đa dạng kích thước (2440x1220, 2440x1830mm; dày 9–25mm)</li><li>Có thể sơn/phủ trang trí trực tiếp</li><li>Chống sâu mọt</li><li>Cường độ tương đối lớn</li><li>Cách âm, cách nhiệt tốt</li><li>Bám đinh, vít <strong>tốt hơn MDF 1,5–2×</strong></li></ul></div>
@@ -371,15 +382,32 @@ body{background:var(--bg);color:var(--ink);font-family:'Lexend',sans-serif;font-
 <div class="section" id="ch23">
 <div class="section-title"><span class="dot blue"></span>2.3 Ván dán (Plywood)</div>
 <figure class="slide-fig"><img alt="Ván dán – giới thiệu" loading="lazy" src="images/slide_32.jpg"/><figcaption>Ván dán: định nghĩa &amp; hình ảnh</figcaption></figure>
-<div class="intro-box" style="border-left-color:#2471a3;border-color:#bfdbfe"><strong>Ván dán</strong> là loại ván tính chất cơ lý tốt, sản xuất từ nhiều lớp ván mỏng (3–5–7 lớp…). Các lớp đặt <strong>vuông góc với nhau</strong> để hạn chế co ngót không đều.</div>
+<div class="intro-box" style="border-left-color:#2471a3;border-color:#bfdbfe">
+  <strong>Ván dán</strong> là tập hợp của nhiều tấm ván mỏng. Các lớp ván mỏng được đặt trồng lên nhau và đặt vuông góc với nhau giữa 2 lớp liên tiếp, điều này nhằm hạn chế sự co ngót không đều nhau. Để đảm bảo ứng suất trong ván được cân bằng thì các lớp trong tấm ván phải làm từ cùng 1 loại gỗ, các lớp ván mỏng và một điều rất quan trọng nữa là số lượng các lớp trong một tấm ván phải là số lẻ để đảm bảo cân bằng ứng suất (ít nhất là 3).
+</div>
 <figure class="slide-fig"><img alt="Cấu trúc &amp; đặc điểm ván dán" loading="lazy" src="images/slide_33.jpg"/><figcaption>Cấu trúc ván dán: số lớp lẻ, vuông góc nhau</figcaption></figure>
-<figure class="slide-fig"><img alt="Thông số &amp; ứng dụng ván dán" loading="lazy" src="images/slide_34.jpg"/><figcaption>Độ ẩm, kích thước, KLTT &amp; ứng dụng ván dán</figcaption></figure>
-<ul class="bullet-list">
-<li>Số lớp phải là <strong>số lẻ</strong> (≥3) để cân bằng ứng suất</li>
-<li>Độ trương nở thấp hơn ván dăm và MDF; KLTT: <strong>600 – 850 kg/m³</strong></li>
-<li>Chống ẩm tốt hơn → dùng được ở bếp, nhà vệ sinh (keo cũng phải chống ẩm)</li>
-<li><strong>Chú ý:</strong> Chống ẩm ≠ chống nước; cạnh mép phải có nẹp bảo vệ</li>
-</ul>
+<div class="two-col">
+  <div class="info-card info">
+    <div class="info-card-title">• Ảnh hưởng của độ ẩm</div>
+    <p>Độ trương nở của ván dán thông thường <strong>thấp hơn</strong> so với ván dăm và ván sợi.</p>
+  </div>
+  <div class="info-card note">
+    <div class="info-card-title">• Thông số kỹ thuật</div>
+    <ul>
+      <li><strong>Kích thước:</strong> Tiêu chuẩn và độ dày tương đương ván dăm và ván sợi.</li>
+      <li><strong>Khối lượng thể tích:</strong> 600 kg/m³ - 850 kg/m³</li>
+    </ul>
+  </div>
+</div>
+<div class="info-card pro">
+  <div class="info-card-title">• Ứng dụng</div>
+  <p>Sử dụng như các loại ván thông thường. Đặc biệt nhờ tính <strong>đàn hồi và chống ẩm tốt</strong>, ván dán phù hợp cho:</p>
+  <ul>
+    <li>Khu vực độ ẩm cao (bếp, nhà vệ sinh) — <em>Lưu ý: Cần dùng keo chống ẩm và nẹp cạnh bảo vệ chuyên dụng.</em></li>
+    <li>Sản xuất đồ gia dụng, thùng xe, tàu thuyền...</li>
+  </ul>
+</div>
+<div class="callout warning"><span class="icon">⚠️</span><span><strong>Quan trọng:</strong> Chống ẩm không có nghĩa là chống nước hoàn toàn. Các cạnh mép phải được bảo vệ bởi nẹp cạnh để ngăn hút ẩm qua thớ gỗ.</span></div>
 </div>
 <div class="section" id="ch2-compare">
 <div class="section-title"><span class="dot blue"></span>So sánh 3 loại ván nhân tạo</div>
@@ -404,7 +432,7 @@ body{background:var(--bg);color:var(--ink);font-family:'Lexend',sans-serif;font-
 <div class="chapter-num-badge ch3-badge">3</div>
 <div class="chapter-title-block">
 <h2>Lớp phủ</h2>
-<p>HPL · Melamine · Veneer — các loại vật liệu phủ bề mặt</p>
+<p>HPL (Laminate) · Melamine · Veneer — các loại vật liệu phủ bề mặt</p>
 </div>
 </div>
 <figure class="slide-fig"><img alt="Ba loại lớp phủ: HPL, Melamine, Veneer" loading="lazy" src="images/slide_35.jpg"/><figcaption>Ba loại lớp phủ chính và đặc điểm</figcaption></figure>
@@ -452,25 +480,79 @@ body{background:var(--bg);color:var(--ink);font-family:'Lexend',sans-serif;font-
 <div class="chapter-num-badge ch5-badge">5</div>
 <div class="chapter-title-block">
 <h2>Chất kết dính</h2>
-<p>PVAc · EVA · PU · Chất kết dính liên kết · Keo 502</p>
+<p>PVAc · EVA · PUR · PU · Keo Contact (Keo chó) · Keo 502</p>
 </div>
 </div>
 <div class="intro-box" style="border-left-color:#6c3483;border-color:#d7bde2">
     Chọn đúng loại keo phụ thuộc vào <strong>loại vật liệu, môi trường sử dụng và yêu cầu kỹ thuật</strong>. Mỗi loại keo có ưu điểm riêng và phạm vi ứng dụng cụ thể.
   </div>
-<div class="slides-row">
-<figure class="slide-fig"><img alt="PVAc và EVA" loading="lazy" src="images/slide_40.jpg"/><figcaption>PVAc (polyvinyl acetate) &amp; EVA (ethylene vinyl acetate)</figcaption></figure>
-<figure class="slide-fig"><img alt="PU và Chất kết dính liên kết" loading="lazy" src="images/slide_41.jpg"/><figcaption>PU adhesive &amp; Contact adhesive</figcaption></figure>
+<div class="adhesive-row">
+  <div class="slide-fig"><img alt="Keo PVAc" loading="lazy" src="images/PVA.jpg"/><figcaption>Keo PVAc</figcaption></div>
+  <div class="adhesive-info">
+    <div class="adhesive-card adh-pvac"><div class="adhesive-card-header">PVAc — Polyvinyl Acetate</div><div class="adhesive-card-body">
+      <p style="font-size:13px; margin-bottom:10px; color:var(--ink2);">Thường gọi là <strong>keo trắng hay keo sữa</strong>, là loại keo phổ biến nhất thế giới nhờ tính đa năng và an toàn. Đây là "vũ khí" chính để dán gỗ, đóng nội thất vì mối nối rất bền chắc.</p>
+      <ul><li>Chỉ phù hợp đồ nội thất trong nhà</li><li>Vật liệu phải có tính hấp thụ keo</li><li>Dán ván lạng, lớp HPL, nối cạnh với cạnh</li></ul></div></div>
+  </div>
 </div>
-<figure class="slide-fig"><img alt="Keo 502" loading="lazy" src="images/slide_42.jpg"/><figcaption>Keo 502 (Cyanoacrylate)</figcaption></figure>
-<div class="adhesive-grid">
-<div class="adhesive-card adh-pvac"><div class="adhesive-card-header">PVAc — Polyvinyl Acetate</div><div class="adhesive-card-body"><ul><li>Chỉ phù hợp đồ nội thất trong nhà</li><li>Vật liệu phải có tính hấp thụ keo</li><li>Dán ván lạng, lớp HPL, nối cạnh với cạnh</li></ul></div></div>
-<div class="adhesive-card adh-eva"><div class="adhesive-card-header">EVA — Ethylene Vinyl Acetate</div><div class="adhesive-card-body"><ul><li>Dạng rắn → lỏng khi gia nhiệt</li><li>Liên kết hình thành khi nhiệt độ giảm</li><li>Chủ yếu dùng cho <strong>dán cạnh bằng máy</strong></li></ul></div></div>
-<div class="adhesive-card adh-pu"><div class="adhesive-card-header">PU — Polyurethane</div><div class="adhesive-card-body"><ul><li>Dùng cho gỗ, kim loại, nhựa, vải, da</li><li>Liên kết ổn định, chống cháy &amp; thấm</li><li>Dùng được <strong>trong nhà &amp; ngoài trời</strong></li></ul></div></div>
-<div class="adhesive-card adh-contact"><div class="adhesive-card-header">Chất kết dính liên kết (Contact)</div><div class="adhesive-card-body"><ul><li>Dán cạnh ở nơi không dùng được máy (bo góc)</li><li>Kết nối bề mặt không hấp thụ keo (kính, kim loại)</li></ul></div></div>
+
+<div class="adhesive-row">
+  <div class="slide-fig"><img alt="Keo EVA" loading="lazy" src="images/slide_40.jpg"/><figcaption>Keo EVA</figcaption></div>
+  <div class="adhesive-info">
+    <div class="adhesive-card adh-eva"><div class="adhesive-card-header">EVA — Ethylene Vinyl Acetate</div><div class="adhesive-card-body">
+      <p style="font-size:13px; margin-bottom:10px; color:var(--ink2);">Keo hạt EVA là loại keo nhiệt nóng chảy (hotmelt) dạng rắn phổ biến nhất, tạo thành từ sự đồng trùng hợp giữa Ethylene và Vinyl Acetate. Keo có đặc tính dẻo, chịu nhiệt tốt và thân thiện môi trường.</p>
+      <ul><li>Dạng rắn → lỏng khi gia nhiệt</li><li>Liên kết hình thành khi nhiệt độ giảm</li><li>Chủ yếu dùng cho <strong>dán cạnh bằng máy</strong></li></ul></div></div>
+  </div>
 </div>
-<div class="adhesive-grid" style="grid-template-columns:1fr">
-<div class="adhesive-card adh-502"><div class="adhesive-card-header">Keo 502 — Cyanoacrylate</div><div class="adhesive-card-body"><ul><li>Không ổn định khi chịu ẩm và nhiệt</li><li>Chỉ dùng liên kết <strong>diện tích nhỏ</strong></li><li>Kim loại, thủy tinh, nhựa, ceramic</li></ul></div></div>
+
+<div class="adhesive-row">
+  <div class="slide-fig"><img alt="Keo PUR" loading="lazy" src="images/PUR.jpg"/><figcaption>Keo PUR (Polyurethane Reactive)</figcaption></div>
+  <div class="adhesive-info">
+    <div class="adhesive-card" style="border-top:3px solid #b03a2e;">
+      <div class="adhesive-card-header" style="background:#b03a2e;">PUR — Polyurethane Reactive</div>
+      <div class="adhesive-card-body">
+        <p style="font-size:13px; margin-bottom:10px; color:var(--ink2);">Keo PUR (Polyurethane Reactive) là một loại keo dán công nghiệp nóng chảy một thành phần, có khả năng tạo ra các liên kết hóa học bền vững khi tiếp xúc với độ ẩm trong không khí.</p>
+        <ul>
+          <li>Keo nóng chảy nhiệt rắn, chống thấm nước <strong>tuyệt đối</strong></li>
+          <li>Dán cạnh <strong>noline</strong> cho nội thất Acrylic, Laminate</li>
+          <li>Phủ bề mặt tấm ván bằng màng PVC, veneer...</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="adhesive-row">
+  <div class="slide-fig"><img alt="Keo PU" loading="lazy" src="images/PU.jpg"/><figcaption>Keo PU</figcaption></div>
+  <div class="adhesive-info">
+    <div class="adhesive-card adh-pu"><div class="adhesive-card-header">PU — Polyurethane</div><div class="adhesive-card-body">
+      <p style="font-size:13px; margin-bottom:10px; color:var(--ink2);">Keo PU (Polyurethane) là loại keo polyme cao cấp, nổi bật với khả năng bám dính siêu chắc, đàn hồi cao và chống chịu thời tiết tốt. Ứng dụng đa dạng từ xây dựng đến công nghiệp (keo dán, foam bọt nở...).</p>
+      <ul><li>Dùng cho gỗ, kim loại, nhựa, vải, da</li><li>Liên kết ổn định, chống cháy &amp; thấm</li><li>Dùng được <strong>trong nhà &amp; ngoài trời</strong></li></ul></div></div>
+  </div>
+</div>
+
+<div class="adhesive-row">
+  <div class="slide-fig"><img alt="Keo Contact" loading="lazy" src="images/Contact adhesive.jpg"/><figcaption>Keo Contact (Keo chó)</figcaption></div>
+  <div class="adhesive-info">
+    <div class="adhesive-card adh-contact"><div class="adhesive-card-header">Keo Contact (Keo chó)</div><div class="adhesive-card-body">
+      <p style="font-size:13px; margin-bottom:10px; color:var(--ink2);">Keo dán tiếp xúc dạng dung môi, bôi hai mặt, chờ khô se rồi ép lại cho độ bám dính cực mạnh. Phù hợp cho Laminate, Veneer và đa vật liệu.</p>
+      <div style="font-size:12px; border-top:1px dashed #ddd; padding-top:8px; margin-top:8px;">
+        <strong>Ưu điểm nổi bật:</strong>
+        <ul style="margin-top:5px; padding-left:15px; list-style-type:disc;">
+          <li style="margin-bottom:3px;"><strong>Đa năng:</strong> Gỗ, gạch, bê tông, đá, gương, thạch cao, nhựa PVC, nhôm, sắt...</li>
+          <li style="margin-bottom:3px;"><strong>Chống chảy xệ:</strong> Keo đậm đặc, dễ thi công trên bề mặt đứng & trần nhà.</li>
+          <li style="margin-bottom:3px;"><strong>Bền bỉ:</strong> Kháng nước, chịu nhiệt tốt (trong nhà & ngoài trời).</li>
+          <li style="margin-bottom:3px;"><strong>Nhanh chóng:</strong> Khô nhanh, có thể sơn phủ lên bề mặt sau khi khô.</li>
+        </ul>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<div class="adhesive-row">
+  <div class="slide-fig"><img alt="Keo 502" loading="lazy" src="images/slide_42.jpg"/><figcaption>Keo 502 (Cyanoacrylate)</figcaption></div>
+  <div class="adhesive-info">
+    <div class="adhesive-card adh-502"><div class="adhesive-card-header">Keo 502 — Cyanoacrylate</div><div class="adhesive-card-body"><ul><li>Không ổn định khi chịu ẩm và nhiệt</li><li>Chỉ dùng liên kết <strong>diện tích nhỏ</strong></li><li>Kim loại, thủy tinh, nhựa, ceramic</li></ul></div></div>
+  </div>
 </div>
 <div class="section-title"><span class="dot amber"></span>Bảng so sánh chất kết dính</div>
 <table class="data-table">
@@ -478,8 +560,9 @@ body{background:var(--bg);color:var(--ink);font-family:'Lexend',sans-serif;font-
 <tbody>
 <tr><td><strong>PVAc</strong></td><td>Trong nhà</td><td>Gỗ, ván có độ hấp thụ</td><td>Dán ván lạng, HPL, nối cạnh</td></tr>
 <tr><td><strong>EVA</strong></td><td>Trong nhà</td><td>Ván gỗ, nẹp cạnh</td><td>Dán cạnh bằng máy tự động</td></tr>
+<tr><td><strong>PUR</strong></td><td>Mọi môi trường</td><td>Acrylic, Laminate, PVC, MDF, HDF, Kim loại</td><td>Nội thất cao cấp, dán cạnh noline, phủ bề mặt</td></tr>
 <tr><td><strong>PU</strong></td><td>Trong nhà &amp; ngoài trời</td><td>Gỗ, kim loại, nhựa, vải, da</td><td>Liên kết đa vật liệu, chống ẩm</td></tr>
-<tr><td><strong>Contact</strong></td><td>Linh hoạt</td><td>Kính, kim loại, bề mặt không hấp thụ</td><td>Dán cạnh thủ công, bo góc</td></tr>
+<tr><td><strong>Contact</strong></td><td>Linh hoạt</td><td>Kính, kim loại, Laminate, Veneer</td><td>Dán cạnh thủ công, bo góc</td></tr>
 <tr><td><strong>Keo 502</strong></td><td>Khô ráo</td><td>Kim loại, thủy tinh, nhựa, ceramic</td><td>Diện tích nhỏ, sửa chữa nhanh</td></tr>
 </tbody>
 </table>
