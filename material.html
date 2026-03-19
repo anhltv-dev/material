@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Khoa Học Vật Liệu I</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Lora:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --red:#c0392b;--red-dark:#922b21;--red-light:#fdf2f1;--red-mid:#f5cbc7;
+  --amber:#d4920a;--amber-light:#fef9ee;
+  --green:#1a7a4a;--green-light:#eaf5ee;
+  --blue:#1a5fa8;--blue-light:#eaf1fb;
+  --ink:#1c1c2e;--ink2:#3a3a52;--muted:#7a7a9a;
+  --bg:#fafaf8;--white:#fff;--border:#e8e6e0;
+  --shadow:0 2px 16px rgba(28,28,46,.08);--shadow-lg:0 8px 40px rgba(28,28,46,.13);
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Lexend',sans-serif;font-size:15px;line-height:1.7}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:260px;flex-shrink:0;background:var(--white);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;scrollbar-width:thin}
+.sidebar-logo{padding:24px 20px 16px;border-bottom:1px solid var(--border)}
+.course-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);background:var(--red-light);border:1px solid var(--red-mid);border-radius:100px;padding:3px 10px;display:inline-block;margin-bottom:8px}
+.sidebar-logo h1{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);line-height:1.3}
+.sidebar-nav{padding:12px 0;flex:1}
+.toc-marker{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin:16px 0 6px;padding:0 20px}
+.nav-chapter{display:flex;align-items:center;gap:8px;padding:9px 20px;font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color .18s}
+.nav-chapter:hover{color:var(--ink)}
+.ch-num{width:22px;height:22px;border-radius:6px;background:var(--red);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-item{display:block;padding:7px 20px 7px 50px;font-size:13px;font-weight:400;color:var(--muted);cursor:pointer;text-decoration:none;border-left:3px solid transparent;transition:all .16s;line-height:1.4}
+.nav-item:hover{color:var(--ink);background:var(--bg)}
+.sidebar-footer{padding:14px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)}
+.progress-bar-wrap{position:fixed;top:0;left:260px;right:0;height:3px;z-index:300;background:var(--border)}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--red),#e74c3c);width:0%;transition:width .3s}
+.content{flex:1;min-width:0;padding:48px 52px 100px;max-width:920px}
+.chapter{margin-bottom:72px;animation:fadeUp .4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.chapter-header{display:flex;align-items:flex-start;gap:18px;margin-bottom:36px;padding-bottom:24px;border-bottom:2px solid var(--border)}
+.chapter-num-badge{width:52px;height:52px;border-radius:14px;flex-shrink:0;background:linear-gradient(135deg,var(--red),#e74c3c);display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-size:22px;font-weight:700;color:#fff;box-shadow:0 4px 16px rgba(192,57,43,.3)}
+.ch2-badge{background:linear-gradient(135deg,#2471a3,#5dade2)!important;box-shadow:0 4px 16px rgba(36,113,163,.3)!important}
+.ch3-badge{background:linear-gradient(135deg,#1a7a4a,#2ecc71)!important;box-shadow:0 4px 16px rgba(26,122,74,.3)!important}
+.ch4-badge{background:linear-gradient(135deg,#d4920a,#f39c12)!important;box-shadow:0 4px 16px rgba(212,146,10,.3)!important}
+.ch5-badge{background:linear-gradient(135deg,#6c3483,#9b59b6)!important;box-shadow:0 4px 16px rgba(108,52,131,.3)!important}
+.chapter-title-block h2{font-family:'Lora',serif;font-size:28px;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:6px}
+.chapter-title-block p{font-size:14px;color:var(--muted)}
+.section{margin-bottom:44px}
+.section-title{font-family:'Lora',serif;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.section-title .dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0}
+.section-title .dot.blue{background:var(--blue)}
+.section-title .dot.green{background:var(--green)}
+.section-title .dot.amber{background:var(--amber)}
+.sub-section{margin-bottom:32px}
+.sub-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sub-title .tag{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:6px;color:#fff}
+.sub-title .tag.red{background:var(--red)}.sub-title .tag.blue{background:var(--blue)}.sub-title .tag.green{background:var(--green)}.sub-title .tag.amber{background:var(--amber)}.sub-title .tag.purple{background:#6c3483}
+.slide-fig{margin:18px 0;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--border)}
+.slide-fig img{width:100%;display:block}
+.slide-fig figcaption{background:var(--ink);color:#e0e0e0;font-size:12px;padding:8px 16px;font-weight:500;letter-spacing:.3px}
+.slides-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.slides-row .slide-fig{margin:0}
+.slides-grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:18px 0}
+.slides-grid3 .slide-fig{margin:0}
+.intro-box{background:linear-gradient(135deg,#fdf8f7,var(--white));border:1px solid var(--red-mid);border-left:4px solid var(--red);border-radius:var(--r);padding:18px 22px;margin-bottom:22px;font-size:14px;color:var(--ink2);line-height:1.75}
+.bullet-list{list-style:none;margin-bottom:16px}
+.bullet-list li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:14px;color:var(--ink2);border-bottom:1px solid #f0efe9}
+.bullet-list li:last-child{border-bottom:none}
+.bullet-list li::before{content:"›";color:var(--red);font-size:18px;font-weight:700;flex-shrink:0;margin-top:-1px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px}
+.info-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.info-card.pro{border-top:3px solid var(--green)}.info-card.con{border-top:3px solid var(--red)}.info-card.note{border-top:3px solid var(--amber)}.info-card.info{border-top:3px solid var(--blue)}
+.info-card-title{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.info-card.pro .info-card-title{color:var(--green)}.info-card.con .info-card-title{color:var(--red)}.info-card.note .info-card-title{color:var(--amber)}.info-card.info .info-card-title{color:var(--blue)}
+.info-card ul{list-style:none}
+.info-card ul li{font-size:13px;color:var(--ink2);padding:5px 0 5px 16px;position:relative;line-height:1.55;border-bottom:1px solid #f5f5f0}
+.info-card ul li:last-child{border-bottom:none}
+.info-card.pro ul li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+.info-card.con ul li::before{content:"✕";position:absolute;left:0;color:var(--red);font-weight:700}
+.info-card.note ul li::before{content:"⚑";position:absolute;left:0;color:var(--amber);font-size:12px;top:6px}
+.info-card.info ul li::before{content:"→";position:absolute;left:0;color:var(--blue);font-weight:700}
+.ps-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow)}
+.ps-problem{padding:12px 18px;background:var(--red-light);border-left:4px solid var(--red);font-size:13px;font-weight:600;color:var(--red-dark)}
+.ps-solution{padding:12px 18px;background:var(--green-light);border-left:4px solid var(--green);font-size:13px;color:var(--ink2)}
+.ps-arrow{text-align:center;padding:4px;font-size:16px;color:var(--muted);background:var(--white)}
+.def-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:22px}
+.def-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.def-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.def-card.dc1::before{background:var(--red)}.def-card.dc2::before{background:var(--blue)}.def-card.dc3::before{background:var(--green)}
+.def-card h4{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.def-card p{font-size:13px;color:var(--ink2);line-height:1.6}
+.shrink-bar-wrap{margin-bottom:22px}
+.shrink-row{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.shrink-label{width:160px;font-size:13px;font-weight:600;color:var(--ink2);flex-shrink:0}
+.shrink-track{flex:1;background:#f0efe9;border-radius:100px;height:10px}
+.shrink-fill{height:100%;border-radius:100px}
+.shrink-fill.s1{background:linear-gradient(90deg,#27ae60,#2ecc71);width:7%}
+.shrink-fill.s2{background:linear-gradient(90deg,var(--amber),#f39c12);width:50%}
+.shrink-fill.s3{background:linear-gradient(90deg,var(--red),#e74c3c);width:100%}
+.shrink-val{font-size:13px;font-weight:700;color:var(--ink2);flex-shrink:0;width:80px}
+.formula-box{background:#1c1c2e;border-radius:var(--r);padding:24px 28px;margin-bottom:22px;color:#fff}
+.formula-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#f39c12;margin-bottom:14px}
+.formula-main{font-family:'Lora',serif;font-size:22px;font-weight:600;color:#ecf0f1;margin-bottom:16px;text-align:center;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
+.formula-note{font-size:13px;color:#bdc3c7;line-height:1.7}
+.formula-note span{color:#f39c12;font-weight:600}
+.formula-alert{margin-top:14px;padding:10px 14px;background:rgba(243,156,18,.15);border:1px solid rgba(243,156,18,.3);border-radius:8px;font-size:13px;color:#f39c12}
+.callout{border-radius:var(--r);padding:16px 20px;margin-bottom:18px;font-size:14px;line-height:1.65;display:flex;gap:12px;align-items:flex-start}
+.callout.warning{background:#fef9ee;border:1px solid #fde68a;color:#92400e}
+.callout.info{background:var(--blue-light);border:1px solid #bfdbfe;color:#1e40af}
+.callout.success{background:var(--green-light);border:1px solid #a7f3d0;color:#065f46}
+.callout .icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.compare-table{width:100%;border-collapse:collapse;margin-bottom:22px;font-size:13px;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.compare-table th{padding:13px 14px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
+.compare-table th.h-feature{background:#2c3e50;color:#fff;text-align:left}
+.compare-table th.h-dam{background:#c0392b;color:#fff;text-align:center}
+.compare-table th.h-mdf{background:#2471a3;color:#fff;text-align:center}
+.compare-table th.h-dan{background:#1a7a4a;color:#fff;text-align:center}
+.compare-table td{padding:10px 14px;border-bottom:1px solid var(--border);background:var(--white)}
+.compare-table td.feature{font-weight:600;color:var(--ink)}
+.compare-table td.center{text-align:center}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table tr:hover td{background:var(--bg)}
+.badge-good{background:#d5f5e3;color:#1a7a4a;border-radius:100px;padding:2px 10px;font-weight:700;font-size:11px}
+.badge-mid{background:#fef3cd;color:#856404;border-radius:100px;padding:2px 10px;font-weight:700;font-size:11px}
+.badge-bad{background:#fde8e8;color:#c0392b;border-radius:100px;padding:2px 10px;font-weight:700;font-size:11px}
+.data-table{width:100%;border-collapse:collapse;margin-bottom:22px;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.data-table th{background:var(--ink);color:#fff;font-size:12px;font-weight:700;letter-spacing:.5px;padding:12px 16px;text-align:left}
+.data-table td{padding:11px 16px;font-size:13px;color:var(--ink2);border-bottom:1px solid var(--border);background:var(--white)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:var(--bg)}
+.material-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:22px}
+.material-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
+.material-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.material-card h4{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.material-card .mat-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:100px;margin-bottom:10px}
+.material-card p{font-size:13px;color:var(--muted);line-height:1.6}
+.adhesive-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
+.adhesive-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.adhesive-card-header{padding:14px 18px;font-size:15px;font-weight:700;color:#fff}
+.adh-pvac .adhesive-card-header{background:#2471a3}
+.adh-eva .adhesive-card-header{background:#1a7a4a}
+.adh-pu .adhesive-card-header{background:#6c3483}
+.adh-contact .adhesive-card-header{background:var(--amber)}
+.adh-502 .adhesive-card-header{background:#c0392b}
+.adhesive-card-body{padding:16px 18px}
+.adhesive-card-body ul{list-style:none}
+.adhesive-card-body ul li{font-size:13px;color:var(--ink2);padding:5px 0 5px 14px;position:relative;border-bottom:1px solid #f0efe9}
+.adhesive-card-body ul li:last-child{border-bottom:none}
+.adhesive-card-body ul li::before{content:"•";position:absolute;left:0;color:var(--muted)}
+.divider{border:none;border-top:1px solid var(--border);margin:36px 0}
+.mob-toggle{display:none;position:fixed;bottom:24px;right:24px;z-index:500;width:48px;height:48px;border-radius:50%;background:var(--red);color:#fff;border:none;font-size:20px;cursor:pointer;box-shadow:0 4px 16px rgba(192,57,43,.4)}
+@media(max-width:900px){
+  .content{padding:32px 24px 80px}
+  .two-col,.def-grid,.material-grid,.adhesive-grid{grid-template-columns:1fr}
+  .slides-row,.slides-grid3{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  .sidebar{position:fixed;left:-260px;z-index:400;transition:left .3s;top:0}
+  .sidebar.open{left:0}
+  .content{padding:24px 16px 80px}
+  .progress-bar-wrap{left:0}
+  .mob-toggle{display:flex;align-items:center;justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="pgBar"></div></div>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-logo">
+<div class="course-tag">Tài liệu học</div>
+<h1>Khoa Học Vật Liệu I</h1>
+</div>
+<div class="sidebar-nav">
+<div class="toc-marker">Nội dung</div>
+<div class="nav-chapter" onclick="gotoId('ch1')"><span class="ch-num">1</span>Gỗ tự nhiên</div>
+<div>
+<a class="nav-item" onclick="gotoId('ch1-intro')">Giới thiệu chung</a>
+<a class="nav-item" onclick="gotoId('ch1-uucon')">Ưu điểm &amp; Nhược điểm</a>
+<a class="nav-item" onclick="gotoId('ch1-cautruc')">Cấu trúc gỗ</a>
+<a class="nav-item" onclick="gotoId('ch1-tytrong')">Tỷ trọng gỗ</a>
+<a class="nav-item" onclick="gotoId('ch1-tinh-chat')">Tính chất &amp; Đặc điểm</a>
+<a class="nav-item" onclick="gotoId('ch1-do-am')">Độ ẩm của gỗ</a>
+<a class="nav-item" onclick="gotoId('ch1-ghep-go')">Ghép gỗ</a>
+</div>
+<div class="nav-chapter" onclick="gotoId('ch2')"><span class="ch-num" style="background:#2471a3">2</span>Ván nhân tạo</div>
+<div>
+<a class="nav-item" onclick="gotoId('ch21')">2.1 Ván dăm</a>
+<a class="nav-item" onclick="gotoId('ch22')">2.2 Ván sợi (MDF)</a>
+<a class="nav-item" onclick="gotoId('ch23')">2.3 Ván dán</a>
+<a class="nav-item" onclick="gotoId('ch2-compare')">So sánh 3 loại ván</a>
+</div>
+<div class="nav-chapter" onclick="gotoId('ch3')"><span class="ch-num" style="background:#1a7a4a">3</span>Lớp phủ</div>
+<div class="nav-chapter" onclick="gotoId('ch4')"><span class="ch-num" style="background:#d4920a">4</span>Nẹp cạnh</div>
+<div class="nav-chapter" onclick="gotoId('ch5')"><span class="ch-num" style="background:#6c3483">5</span>Chất kết dính</div>
+</div>
+<div class="sidebar-footer">GIZ · HÄFELE · FPA Bình Định · 2024</div>
+</nav>
+<main class="content">
+<div class="chapter" id="ch1">
+<div class="chapter-header">
+<div class="chapter-num-badge">1</div>
+<div class="chapter-title-block">
+<h2>Gỗ tự nhiên</h2>
+<p>Đặc điểm, ưu nhược điểm, cấu trúc và tính chất vật lý của gỗ</p>
+</div>
+</div>
+<div class="section" id="ch1-intro">
+<div class="section-title"><span class="dot"></span>Giới thiệu chung</div>
+
+<ul class="bullet-list">
+<li>Gỗ là nguyên vật liệu được con người sử dụng <strong>lâu đời và rộng rãi nhất</strong></li>
+<li>Là một trong những vật tư chủ yếu của <strong>nền kinh tế quốc dân</strong></li>
+<li>Sử dụng rộng rãi: công nghiệp, nông nghiệp, giao thông vận tải, kiến trúc, xây dựng, khai khoáng</li>
+<li>Ứng dụng đa dạng: văn phòng phẩm, nhạc cụ, dụng cụ thể thao, toa tàu, thuyền, phà, cầu cống, bàn ghế, đồ dùng gia đình, bệnh viện, thư viện…</li>
+</ul>
+</div>
+<div class="section" id="ch1-uucon">
+<div class="section-title"><span class="dot"></span>Ưu điểm &amp; Nhược điểm</div>
+<div class="two-col">
+<div class="info-card pro">
+<div class="info-card-title">✓ Ưu điểm</div>
+<ul>
+<li>Nhẹ, KLTT trung bình 0,5 – 0,7 g/cm³</li>
+<li>Cách nhiệt, cách điện, ngăn âm tốt</li>
+<li>Dễ gia công: cưa, xẻ, bào, khoan, tách chẻ nhưng vẫn chịu lực tốt</li>
+<li>Dễ nối ghép bằng đinh, mộng, chất kết dính</li>
+<li>Vân thớ đẹp, dễ nhuộm màu, dễ trang sức</li>
+<li>Dễ phân ly bằng hoá chất (sản xuất giấy &amp; ván nhân tạo)</li>
+<li>Nguyên liệu tự nhiên, có thể <strong>tái tạo</strong></li>
+<li>Dễ xử lý cạnh, làm profile</li>
+</ul>
+</div>
+<div class="info-card con">
+<div class="info-card-title">✕ Nhược điểm</div>
+<ul>
+<li>Sinh trưởng chậm, đường kính có hạn, nhiều khuyết tật tự nhiên</li>
+<li>Dễ mục, dễ bị mối, mọt phá hoại</li>
+<li>Dễ nứt nẻ, cong vênh, biến hình khi phơi sấy</li>
+<li>Tỷ lệ co dãn cao, chịu tác động lớn của độ ẩm &amp; nhiệt độ</li>
+<li>Dễ biến màu, dễ cháy</li>
+</ul>
+</div>
+</div>
+<div class="section-title" style="margin-top:28px"><span class="dot"></span>Biện pháp khắc phục</div>
+<div class="ps-card"><div class="ps-problem">⚠ Sinh trưởng chậm, đường kính có hạn, nhiều khuyết tật tự nhiên</div><div class="ps-arrow">↓</div><div class="ps-solution">✔ Sử dụng các biện pháp kỹ thuật lâm – sinh hợp lý trong trồng và chăm sóc rừng</div></div>
+<div class="ps-card"><div class="ps-problem">⚠ Dễ mục, dễ bị sinh vật (mối, mọt…) phá hoại</div><div class="ps-arrow">↓</div><div class="ps-solution">✔ Phun tẩm các hoá chất chống mối mọt</div></div>
+<div class="ps-card"><div class="ps-problem">⚠ Dễ nứt nẻ, cong vênh, biến hình khi phơi sấy</div><div class="ps-arrow">↓</div><div class="ps-solution">✔ Có phương án cưa xẻ, bóc lớp thích hợp</div></div>
+<div class="ps-card"><div class="ps-problem">⚠ Tỷ lệ co dãn cao, chịu tác động lớn của độ ẩm &amp; nhiệt độ</div><div class="ps-arrow">↓</div><div class="ps-solution">✔ Loại bỏ yếu tố gây co dãn bằng cách ngâm tẩm hoá chất hoặc sấy gỗ</div></div>
+<div class="ps-card"><div class="ps-problem">⚠ Dễ biến màu, dễ cháy</div><div class="ps-arrow">↓</div><div class="ps-solution">✔ Ngâm tẩm hoặc sơn phủ các chất chống bắt lửa (lưu ý có thể làm thay đổi một số tính chất của gỗ)</div></div>
+</div>
+<div class="section" id="ch1-cautruc">
+<div class="section-title"><span class="dot"></span>Cấu trúc gỗ</div>
+<div class="sub-section">
+<div class="sub-title"><span class="tag red">Vòng năm</span>Ba mặt cắt của thân cây</div>
+<figure class="slide-fig"><img alt="Vòng năm trên ba mặt cắt" loading="lazy" src="images/slide_6.jpg"/><figcaption>Slide 6 — Vòng năm: mặt cắt ngang, xuyên tâm, tiếp tuyến</figcaption></figure>
+<div class="def-grid">
+<div class="def-card dc1"><h4>Mặt cắt ngang</h4><p>Phương vuông góc với trục dọc thân cây. Nhìn thấy rõ vòng năm sinh trưởng.</p></div>
+<div class="def-card dc2"><h4>Mặt cắt xuyên tâm</h4><p>Phương song song với trục dọc và đi qua tâm (lõi) thân cây.</p></div>
+<div class="def-card dc3"><h4>Mặt cắt tiếp tuyến</h4><p>Phương song song với trục dọc và vuông góc với đường thẳng xuyên tâm.</p></div>
+</div>
+</div>
+<div class="sub-section">
+<div class="sub-title"><span class="tag red">Cấu trúc</span>Gỗ dác – Gỗ lõi</div>
+<figure class="slide-fig"><img alt="Gỗ dác và gỗ lõi" loading="lazy" src="images/slide_8.jpg"/><figcaption>Slide 8 — Gỗ dác và Gỗ lõi trên mặt cắt ngang</figcaption></figure>
+<div class="two-col">
+<div class="info-card info"><div class="info-card-title">Gỗ dác (Splint wood)</div><ul><li>Dẫn truyền nước &amp; chất dinh dưỡng từ rễ lên cành</li><li>Độ ẩm cao hơn gỗ lõi</li><li>Màu nhạt hơn gỗ lõi</li><li>Khả năng chống sâu nấm thấp hơn</li></ul></div>
+<div class="info-card note"><div class="info-card-title">Gỗ lõi (Heartwood)</div><ul><li>Hình thành từ gỗ dác theo thời gian</li><li>Màu sẫm, nặng, cứng</li><li>Khó thấm nước</li><li>Chống sâu nấm, mối mọt tốt hơn gỗ dác</li></ul></div>
+</div>
+</div>
+<div class="sub-section">
+<div class="sub-title"><span class="tag red">Vòng năm</span>Gỗ sớm – Gỗ muộn</div>
+<div class="two-col">
+<div class="info-card info"><div class="info-card-title">Gỗ sớm (Early wood)</div><ul><li>Sinh trong điều kiện thuận lợi (nhiều mưa, nước dồi dào)</li><li>Màu sáng hơn</li><li>Tế bào vách mỏng, ruột lớn → dẫn nhiều nước</li><li>Khả năng chịu lực cơ học thấp hơn</li></ul></div>
+<div class="info-card note"><div class="info-card-title">Gỗ muộn (Late wood)</div><ul><li>Sinh trong điều kiện không thuận lợi</li><li>Màu thẫm hơn</li><li>Tế bào vách dày, ruột nhỏ</li><li>Khả năng chịu tác động cơ học tốt</li></ul></div>
+</div>
+<div class="callout info"><span class="icon">💡</span><span>Sự khác biệt hình thái và cấu trúc tế bào gỗ sớm/muộn là <strong>nguyên nhân hình thành vòng năm</strong> của cây.</span></div>
+</div>
+<div class="sub-section">
+<div class="sub-title"><span class="tag red">Nhân tố</span>Nhân tố ảnh hưởng tới chất lượng gỗ</div>
+<div class="two-col">
+<div class="info-card info"><div class="info-card-title">Nhân tố bên trong</div><ul><li>Tính chất cơ lý thay đổi trong và giữa các loài</li><li>Ứng suất sinh trưởng</li><li>Hình dạng của cây</li><li>Đặc tính sinh cành</li></ul></div>
+<div class="info-card note"><div class="info-card-title">Ảnh hưởng từ bên ngoài</div><ul><li>Phản ứng của gỗ (với gió, đất dốc)</li><li>Mạch nhựa Kino (tổn thương do khai thác, côn trùng, lửa)</li><li>Quản lý rừng trồng (lập địa, mật độ, tỉa cành)</li></ul></div>
+</div>
+<figure class="slide-fig"><img alt="Cong vênh nứt nẻ do ứng suất sinh trưởng" loading="lazy" src="images/slide_11.jpg"/><figcaption>Slide 11 — Hình ảnh cong vênh &amp; nứt nẻ do ứng suất sinh trưởng</figcaption></figure>
+</div>
+</div>
+<div class="section" id="ch1-tytrong">
+<div class="section-title"><span class="dot"></span>Tỷ trọng gỗ</div>
+<div class="slides-row">
+<figure class="slide-fig"><img alt="Tỷ trọng gỗ và cấu trúc tế bào" loading="lazy" src="images/slide_12.jpg"/><figcaption>Slide 12 — Tỷ trọng gỗ &amp; mặt cắt tế bào</figcaption></figure>
+<figure class="slide-fig"><img alt="Tại sao các loại gỗ có tỷ trọng khác nhau" loading="lazy" src="images/slide_13.jpg"/><figcaption>Slide 13 — So sánh tỷ trọng cao &amp; thấp</figcaption></figure>
+</div>
+<div class="intro-box"><strong>Tỷ trọng vách tế bào: 1520 kg/m³</strong> — giống nhau ở tất cả các loài. Sự khác biệt tỷ trọng giữa các loài là do <strong>số lượng khoảng trống trong tế bào khác nhau</strong>.</div>
+<figure class="slide-fig"><img alt="Sự biến động của tỷ trọng trong cây" loading="lazy" src="images/slide_14.jpg"/><figcaption>Slide 14 — Biến động tỷ trọng từ tâm ra vỏ</figcaption></figure>
+<div class="two-col">
+<div class="info-card info"><div class="info-card-title">Tỷ trọng cao</div><ul><li>Vách tế bào <strong>dày</strong></li><li>Khoảng trống trong tế bào ít</li><li>Cường độ cơ học cao hơn</li></ul></div>
+<div class="info-card note"><div class="info-card-title">Tỷ trọng thấp</div><ul><li>Vách tế bào <strong>mỏng</strong></li><li>Khoảng trống trong tế bào nhiều</li><li>Nhẹ hơn nhưng cường độ thấp hơn</li></ul></div>
+</div>
+</div>
+<div class="section" id="ch1-tinh-chat">
+<div class="section-title"><span class="dot"></span>Tính chất &amp; Đặc điểm của gỗ</div>
+<div class="sub-section">
+<div class="sub-title"><span class="tag blue">Nước</span>Nước trong gỗ</div>
+<figure class="slide-fig"><img alt="Nước trong gỗ – nước tự do và nước thấm" loading="lazy" src="images/slide_15.jpg"/><figcaption>Slide 15 — Hai dạng nước trong gỗ: nước tự do &amp; nước thấm</figcaption></figure>
+<div class="two-col">
+<div class="info-card info"><div class="info-card-title">Nước tự do</div><ul><li>Tồn tại trong <strong>ruột tế bào</strong></li><li>Thoát ra trước khi sấy khô</li><li>Ít ảnh hưởng đến tính chất cơ học</li></ul></div>
+<div class="info-card note"><div class="info-card-title">Nước thấm</div><ul><li>Tồn tại trong <strong>vách tế bào</strong></li><li>Ảnh hưởng trực tiếp đến tính chất cơ học</li><li>Gây co giãn, cong vênh khi thay đổi</li></ul></div>
+</div>
+</div>
+<div class="sub-section">
+<div class="sub-title"><span class="tag red">Co giãn</span>Quá trình co rút &amp; giãn nở</div>
+<div class="callout warning"><span class="icon">⚠️</span><span>Co rút và giãn nở là <strong>nguyên nhân chính gây biến hình cong vênh</strong>. Quá trình này không đồng đều theo ba chiều!</span></div>
+<div class="shrink-bar-wrap">
+<div class="shrink-row"><div class="shrink-label">Chiều dọc thớ</div><div class="shrink-track"><div class="shrink-fill s1"></div></div><div class="shrink-val">~1%</div></div>
+<div class="shrink-row"><div class="shrink-label">Chiều xuyên tâm</div><div class="shrink-track"><div class="shrink-fill s2"></div></div><div class="shrink-val">2 – 7%</div></div>
+<div class="shrink-row"><div class="shrink-label">Chiều tiếp tuyến</div><div class="shrink-track"><div class="shrink-fill s3"></div></div><div class="shrink-val">4 – 14%</div></div>
+</div>
+<figure class="slide-fig"><img alt="Sơ đồ các chiều của gỗ" loading="lazy" src="images/slide_18.jpg"/><figcaption>Slide 18 — Sơ đồ chiều xuyên tâm, tiếp tuyến, dọc thớ</figcaption></figure>
+</div>
+</div>
+<div class="section" id="ch1-do-am">
+<div class="section-title"><span class="dot"></span>Độ ẩm của gỗ</div>
+<div class="intro-box">Độ ẩm là <strong>tỷ lệ % giữa khối lượng nước có trong gỗ so với khối lượng gỗ</strong>. Có hai loại: độ ẩm tương đối (Wa) và độ ẩm tuyệt đối (W0).</div>
+
+<div class="two-col">
+<div class="formula-box"><div class="formula-label">a) Độ ẩm tương đối — Wa (%)</div><div class="formula-main">Wa = (m1 - m0) / m1 x 100%</div><div class="formula-note"><span>m1</span> = khối lượng gỗ có nước (g)<br/><span>m0</span> = khối lượng gỗ khô kiệt (g)</div><div class="formula-alert">Luôn nhỏ hơn 100%</div></div>
+<div class="formula-box" style="background:#1a2e44"><div class="formula-label">b) Độ ẩm tuyệt đối — W0 (%)</div><div class="formula-main">W0 = (m1 - m0) / m0 x 100%</div><div class="formula-note"><span>m1</span> = khối lượng gỗ có nước (g)<br/><span>m0</span> = khối lượng gỗ khô kiệt (g)</div><div class="formula-alert">Có thể lên đến trên 100%</div></div>
+</div>
+</div>
+<div class="section" id="ch1-ghep-go">
+<div class="section-title"><span class="dot"></span>Ghép gỗ &amp; Ứng dụng</div>
+<figure class="slide-fig"><img alt="Hình minh họa về ghép gỗ" loading="lazy" src="images/slide_22.jpg"/><figcaption>Slide 22 — Các phương pháp ghép gỗ</figcaption></figure>
+<div class="callout info"><span class="icon">💡</span><span>Khi ghép gỗ nên xếp các thanh theo nguyên tắc <strong>"Kern an Kern, Splint an Splint"</strong> (lõi với lõi, dác với dác) để hạn chế biến dạng tổng thể.</span></div>
+<figure class="slide-fig"><img alt="Ứng dụng gỗ trong sản xuất" loading="lazy" src="images/slide_23.jpg"/><figcaption>Slide 23 — Hình ảnh sản xuất và ứng dụng gỗ thực tế</figcaption></figure>
+</div>
+</div>
+<hr class="divider"/>
+<div class="chapter" id="ch2">
+<div class="chapter-header">
+<div class="chapter-num-badge ch2-badge">2</div>
+<div class="chapter-title-block">
+<h2>Ván nhân tạo</h2>
+<p>Ván dăm · Ván sợi MDF · Ván dán — đặc điểm, ưu nhược điểm &amp; ứng dụng</p>
+</div>
+</div>
+<figure class="slide-fig"><img alt="Giới thiệu ván nhân tạo" loading="lazy" src="images/slide_24.jpg"/><figcaption>Slide 24 — 3 nhóm ván nhân tạo cần nghiên cứu</figcaption></figure>
+<div class="section" id="ch21">
+<div class="section-title"><span class="dot blue"></span>2.1 Ván dăm (Particle Board)</div>
+<figure class="slide-fig"><img alt="Ván dăm – đặc điểm" loading="lazy" src="images/slide_25.jpg"/><figcaption>Slide 25 — Ván dăm: định nghĩa &amp; đặc điểm</figcaption></figure>
+<div class="intro-box" style="border-left-color:#2471a3;border-color:#bfdbfe"><strong>Ván dăm</strong> là dăm gỗ kết hợp với keo dán qua ép nhiệt tạo thành. Có <strong>3 lớp cơ bản</strong>: 2 lớp ngoài mịn + lớp giữa thô — giúp tăng khả năng uốn và giảm khối lượng.</div>
+<figure class="slide-fig"><img alt="Cấu trúc 3 lớp của ván dăm" loading="lazy" src="images/slide_26.jpg"/><figcaption>Slide 26 — Cấu trúc 3 lớp của ván dăm</figcaption></figure>
+
+<div class="two-col">
+<div class="info-card pro"><div class="info-card-title">✓ Ưu điểm</div><ul><li>Giá thành rẻ</li><li>Đa dạng kích thước (2440x1220, 2440x1830mm; dày 9–25mm)</li><li>Có thể sơn/phủ trang trí trực tiếp</li><li>Chống sâu mọt</li><li>Cường độ tương đối lớn</li><li>Cách âm, cách nhiệt tốt</li><li>Bám đinh, vít <strong>tốt hơn MDF 1,5–2×</strong></li></ul></div>
+<div class="info-card con"><div class="info-card-title">✕ Nhược điểm</div><ul><li>Khả năng dán cạnh yếu</li><li>Khó gia công tạo hình</li><li>Dễ hút ẩm và trương nở lớn</li><li>Chứa formaldehyde tự do → ảnh hưởng sức khoẻ</li></ul></div>
+</div>
+<div class="callout warning"><span class="icon">🏠</span><span><strong>Ứng dụng:</strong> Chỉ nên dùng trong nội thất — không thích hợp ở khu vực có độ ẩm cao.</span></div>
+</div>
+<div class="section" id="ch22">
+<div class="section-title"><span class="dot blue"></span>2.2 Ván sợi (MDF)</div>
+<figure class="slide-fig"><img alt="Ván sợi MDF – giới thiệu" loading="lazy" src="images/slide_29.jpg"/><figcaption>Slide 29 — Ván sợi MDF: định nghĩa &amp; phân loại</figcaption></figure>
+<div class="intro-box" style="border-left-color:#2471a3;border-color:#bfdbfe"><strong>MDF</strong> = Medium Density Fibreboard. Sản xuất từ sợi ván mịn trộn chất kết dính rồi ép ở nhiệt độ cao. Ba loại: ván sợi cứng, MDF và ván sợi mềm — <strong>MDF phổ biến nhất</strong>.</div>
+<figure class="slide-fig"><img alt="Đặc điểm ván sợi MDF" loading="lazy" src="images/slide_30.jpg"/><figcaption>Slide 30 — Đặc điểm, kích thước, KLTT của MDF</figcaption></figure>
+<figure class="slide-fig"><img alt="Ứng dụng ván sợi MDF" loading="lazy" src="images/slide_31.jpg"/><figcaption>Slide 31 — Ứng dụng MDF trong nội thất</figcaption></figure>
+<ul class="bullet-list">
+<li>Cường độ cao — chịu uốn <strong>gấp 2× ván dăm</strong></li>
+<li>Bề mặt phẳng, nhẵn; kết cấu chặt chẽ và đồng đều</li>
+<li>Tính năng gia công tốt gần như gỗ tự nhiên</li>
+<li>Kích thước: sản xuất mỏng từ <strong>3mm</strong>; KLTT: <strong>600 – 900 kg/m³</strong></li>
+</ul>
+<div class="callout warning"><span class="icon">💧</span><span><strong>Lưu ý:</strong> MDF hấp thụ độ ẩm rất cao — tránh tiếp xúc trực tiếp với nước.</span></div>
+</div>
+<div class="section" id="ch23">
+<div class="section-title"><span class="dot blue"></span>2.3 Ván dán (Plywood)</div>
+<figure class="slide-fig"><img alt="Ván dán – giới thiệu" loading="lazy" src="images/slide_32.jpg"/><figcaption>Slide 32 — Ván dán: định nghĩa &amp; hình ảnh</figcaption></figure>
+<div class="intro-box" style="border-left-color:#2471a3;border-color:#bfdbfe"><strong>Ván dán</strong> là loại ván tính chất cơ lý tốt, sản xuất từ nhiều lớp ván mỏng (3–5–7 lớp…). Các lớp đặt <strong>vuông góc với nhau</strong> để hạn chế co ngót không đều.</div>
+<figure class="slide-fig"><img alt="Cấu trúc &amp; đặc điểm ván dán" loading="lazy" src="images/slide_33.jpg"/><figcaption>Slide 33 — Cấu trúc ván dán: số lớp lẻ, vuông góc nhau</figcaption></figure>
+<figure class="slide-fig"><img alt="Thông số &amp; ứng dụng ván dán" loading="lazy" src="images/slide_34.jpg"/><figcaption>Slide 34 — Độ ẩm, kích thước, KLTT &amp; ứng dụng ván dán</figcaption></figure>
+<ul class="bullet-list">
+<li>Số lớp phải là <strong>số lẻ</strong> (≥3) để cân bằng ứng suất</li>
+<li>Độ trương nở thấp hơn ván dăm và MDF; KLTT: <strong>600 – 850 kg/m³</strong></li>
+<li>Chống ẩm tốt hơn → dùng được ở bếp, nhà vệ sinh (keo cũng phải chống ẩm)</li>
+<li><strong>Chú ý:</strong> Chống ẩm ≠ chống nước; cạnh mép phải có nẹp bảo vệ</li>
+</ul>
+</div>
+<div class="section" id="ch2-compare">
+<div class="section-title"><span class="dot blue"></span>So sánh 3 loại ván nhân tạo</div>
+<table class="compare-table">
+<thead><tr><th class="h-feature">Tiêu chí</th><th class="h-dam">Ván dăm</th><th class="h-mdf">Ván sợi (MDF)</th><th class="h-dan">Ván dán</th></tr></thead>
+<tbody>
+<tr><td class="feature">KLTT (kg/m3)</td><td class="center">600–700</td><td class="center">600–900</td><td class="center">600–850</td></tr>
+<tr><td class="feature">Cường độ uốn</td><td class="center"><span class="badge-mid">Trung bình</span></td><td class="center"><span class="badge-good">Cao (2x VD)</span></td><td class="center"><span class="badge-good">Tốt</span></td></tr>
+<tr><td class="feature">Bề mặt</td><td class="center"><span class="badge-mid">Thô hơn</span></td><td class="center"><span class="badge-good">Phẳng, nhẵn</span></td><td class="center"><span class="badge-mid">Tuỳ loại gỗ</span></td></tr>
+<tr><td class="feature">Dán cạnh</td><td class="center"><span class="badge-bad">Yếu</span></td><td class="center"><span class="badge-mid">Trung bình</span></td><td class="center"><span class="badge-good">Tốt</span></td></tr>
+<tr><td class="feature">Bám đinh/vít</td><td class="center"><span class="badge-good">Tốt nhất</span></td><td class="center"><span class="badge-mid">Trung bình</span></td><td class="center"><span class="badge-good">Tốt</span></td></tr>
+<tr><td class="feature">Chống ẩm</td><td class="center"><span class="badge-bad">Kém</span></td><td class="center"><span class="badge-bad">Kém</span></td><td class="center"><span class="badge-mid">Tốt hơn</span></td></tr>
+<tr><td class="feature">Gia công tạo hình</td><td class="center"><span class="badge-bad">Khó</span></td><td class="center"><span class="badge-good">Tốt (nhu go TN)</span></td><td class="center"><span class="badge-mid">Trung bình</span></td></tr>
+<tr><td class="feature">Giá thành</td><td class="center"><span class="badge-good">Re nhat</span></td><td class="center"><span class="badge-mid">Trung bình</span></td><td class="center"><span class="badge-mid">Cao hon</span></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr class="divider"/>
+<div class="chapter" id="ch3">
+<div class="chapter-header">
+<div class="chapter-num-badge ch3-badge">3</div>
+<div class="chapter-title-block">
+<h2>Lớp phủ</h2>
+<p>HPL · Melamine · Veneer — các loại vật liệu phủ bề mặt</p>
+</div>
+</div>
+<figure class="slide-fig"><img alt="Ba loại lớp phủ: HPL, Melamine, Veneer" loading="lazy" src="images/slide_35.jpg"/><figcaption>Slide 35 — Ba loại lớp phủ chính và đặc điểm</figcaption></figure>
+<div class="material-grid">
+<div class="material-card" style="border-top:3px solid #c0392b">
+<span class="mat-tag" style="background:#fdf2f1;color:#c0392b;border:1px solid #f5cbc7">HPL</span>
+<h4>High Pressure Laminate</h4>
+<p>Nhiều lớp vật liệu hữu cơ ngâm nhựa tổng hợp rồi nén lại. Độ dày <strong>0,6 – 1,3mm</strong>. Bề mặt cứng, bền.</p>
+</div>
+<div class="material-card" style="border-top:3px solid #2471a3">
+<span class="mat-tag" style="background:#eaf1fb;color:#2471a3;border:1px solid #bfdbfe">Melamine</span>
+<h4>Melamine Faced Board</h4>
+<p>Mỏng hơn HPL, <strong>phủ sẵn lên bề mặt ván</strong> trước khi xuất xưởng. Tiện lợi, chi phí thấp hơn HPL.</p>
+</div>
+<div class="material-card" style="border-top:3px solid #1a7a4a">
+<span class="mat-tag" style="background:#eaf5ee;color:#1a7a4a;border:1px solid #a7f3d0">Veneer</span>
+<h4>Ván mỏng tự nhiên</h4>
+<p>Lạng hoặc bóc từ gỗ tự nhiên, dày <strong>0,3 – 4mm</strong>. Cần đánh nhẵn, ver-ni để bảo vệ. Vẻ đẹp tự nhiên.</p>
+</div>
+</div>
+</div>
+<hr class="divider"/>
+<div class="chapter" id="ch4">
+<div class="chapter-header">
+<div class="chapter-num-badge ch4-badge">4</div>
+<div class="chapter-title-block">
+<h2>Nẹp cạnh</h2>
+<p>Các loại nẹp bảo vệ và trang trí cạnh ván</p>
+</div>
+</div>
+<div class="intro-box" style="border-left-color:#d4920a;border-color:#fde68a">
+    Nẹp cạnh bảo vệ <strong>cạnh mép ván</strong> khỏi tác động cơ học và hút ẩm, đồng thời tạo thẩm mỹ. Cho dù ván có khả năng chống ẩm, cạnh mép vẫn <strong>phải có nẹp bảo vệ</strong>.
+  </div>
+<div class="slides-grid3">
+<figure class="slide-fig"><img alt="Nẹp nhựa PVC" loading="lazy" src="images/slide_36.jpg"/><figcaption>Slide 36 — Nẹp nhựa PVC đa dạng màu sắc</figcaption></figure>
+<figure class="slide-fig"><img alt="Nẹp veneer" loading="lazy" src="images/slide_37.jpg"/><figcaption>Slide 37 — Nẹp veneer gỗ tự nhiên</figcaption></figure>
+<figure class="slide-fig"><img alt="Nẹp nhôm" loading="lazy" src="images/slide_38.jpg"/><figcaption>Slide 38 — Nẹp nhôm cho cạnh bàn, cầu thang</figcaption></figure>
+</div>
+<figure class="slide-fig"><img alt="Nẹp cạnh bảo vệ trẻ em" loading="lazy" src="images/slide_39.jpg"/><figcaption>Slide 39 — Nẹp cạnh bảo vệ trẻ em (foam mềm)</figcaption></figure>
+<div class="callout info"><span class="icon">💡</span><span><strong>Nguyên tắc:</strong> Chống ẩm ≠ chống nước. Cạnh mép ván <strong>luôn cần nẹp cạnh</strong> để ngăn hút ẩm qua cạnh.</span></div>
+</div>
+<hr class="divider"/>
+<div class="chapter" id="ch5">
+<div class="chapter-header">
+<div class="chapter-num-badge ch5-badge">5</div>
+<div class="chapter-title-block">
+<h2>Chất kết dính</h2>
+<p>PVAc · EVA · PU · Chất kết dính liên kết · Keo 502</p>
+</div>
+</div>
+<div class="intro-box" style="border-left-color:#6c3483;border-color:#d7bde2">
+    Chọn đúng loại keo phụ thuộc vào <strong>loại vật liệu, môi trường sử dụng và yêu cầu kỹ thuật</strong>. Mỗi loại keo có ưu điểm riêng và phạm vi ứng dụng cụ thể.
+  </div>
+<div class="slides-row">
+<figure class="slide-fig"><img alt="PVAc và EVA" loading="lazy" src="images/slide_40.jpg"/><figcaption>Slide 40 — PVAc (polyvinyl acetate) &amp; EVA (ethylene vinyl acetate)</figcaption></figure>
+<figure class="slide-fig"><img alt="PU và Chất kết dính liên kết" loading="lazy" src="images/slide_41.jpg"/><figcaption>Slide 41 — PU adhesive &amp; Contact adhesive</figcaption></figure>
+</div>
+<figure class="slide-fig"><img alt="Keo 502" loading="lazy" src="images/slide_42.jpg"/><figcaption>Slide 42 — Keo 502 (Cyanoacrylate)</figcaption></figure>
+<div class="adhesive-grid">
+<div class="adhesive-card adh-pvac"><div class="adhesive-card-header">PVAc — Polyvinyl Acetate</div><div class="adhesive-card-body"><ul><li>Chỉ phù hợp đồ nội thất trong nhà</li><li>Vật liệu phải có tính hấp thụ keo</li><li>Dán ván lạng, lớp HPL, nối cạnh với cạnh</li></ul></div></div>
+<div class="adhesive-card adh-eva"><div class="adhesive-card-header">EVA — Ethylene Vinyl Acetate</div><div class="adhesive-card-body"><ul><li>Dạng rắn → lỏng khi gia nhiệt</li><li>Liên kết hình thành khi nhiệt độ giảm</li><li>Chủ yếu dùng cho <strong>dán cạnh bằng máy</strong></li></ul></div></div>
+<div class="adhesive-card adh-pu"><div class="adhesive-card-header">PU — Polyurethane</div><div class="adhesive-card-body"><ul><li>Dùng cho gỗ, kim loại, nhựa, vải, da</li><li>Liên kết ổn định, chống cháy &amp; thấm</li><li>Dùng được <strong>trong nhà &amp; ngoài trời</strong></li></ul></div></div>
+<div class="adhesive-card adh-contact"><div class="adhesive-card-header">Chất kết dính liên kết (Contact)</div><div class="adhesive-card-body"><ul><li>Dán cạnh ở nơi không dùng được máy (bo góc)</li><li>Kết nối bề mặt không hấp thụ keo (kính, kim loại)</li></ul></div></div>
+</div>
+<div class="adhesive-grid" style="grid-template-columns:1fr">
+<div class="adhesive-card adh-502"><div class="adhesive-card-header">Keo 502 — Cyanoacrylate</div><div class="adhesive-card-body"><ul><li>Không ổn định khi chịu ẩm và nhiệt</li><li>Chỉ dùng liên kết <strong>diện tích nhỏ</strong></li><li>Kim loại, thủy tinh, nhựa, ceramic</li></ul></div></div>
+</div>
+<div class="section-title"><span class="dot amber"></span>Bảng so sánh chất kết dính</div>
+<table class="data-table">
+<thead><tr><th>Loại keo</th><th>Môi trường</th><th>Vật liệu phù hợp</th><th>Ứng dụng chính</th></tr></thead>
+<tbody>
+<tr><td><strong>PVAc</strong></td><td>Trong nhà</td><td>Gỗ, ván có độ hấp thụ</td><td>Dán ván lạng, HPL, nối cạnh</td></tr>
+<tr><td><strong>EVA</strong></td><td>Trong nhà</td><td>Ván gỗ, nẹp cạnh</td><td>Dán cạnh bằng máy tự động</td></tr>
+<tr><td><strong>PU</strong></td><td>Trong nhà &amp; ngoài trời</td><td>Gỗ, kim loại, nhựa, vải, da</td><td>Liên kết đa vật liệu, chống ẩm</td></tr>
+<tr><td><strong>Contact</strong></td><td>Linh hoạt</td><td>Kính, kim loại, bề mặt không hấp thụ</td><td>Dán cạnh thủ công, bo góc</td></tr>
+<tr><td><strong>Keo 502</strong></td><td>Khô ráo</td><td>Kim loại, thủy tinh, nhựa, ceramic</td><td>Diện tích nhỏ, sửa chữa nhanh</td></tr>
+</tbody>
+</table>
+</div>
+</main>
+</div>
+<button class="mob-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+<script>
+function gotoId(id) {
+  var el = document.getElementById(id);
+  if (el) { el.scrollIntoView({behavior: 'smooth', block: 'start'}); }
+  if (window.innerWidth < 700) { document.getElementById('sidebar').classList.remove('open'); }
+}
+window.addEventListener('scroll', function() {
+  var d = document.documentElement;
+  var top = d.scrollTop || document.body.scrollTop || 0;
+  var total = d.scrollHeight - d.clientHeight;
+  var pct = total > 0 ? (top / total * 100) : 0;
+  document.getElementById('pgBar').style.width = Math.min(pct, 100) + '%';
+}, {passive: true});
+</script>
+</body>
+</html>
