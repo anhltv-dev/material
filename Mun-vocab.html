@@ -1061,6 +1061,14 @@ body{overflow-x:hidden;}
   background:#e8fded;border-radius:10px;color:#16a34a;
   font-weight:800;font-size:.85rem;margin-top:8px;
 }
+/* Page lock while password is required */
+body.locked > *:not(.pw-modal){
+  display:none !important;
+}
+body.locked{
+  overflow:hidden !important;
+}
+
 /* Password modal */
 .pw-modal{
   display:none;position:fixed;top:0;left:0;width:100%;height:100%;
@@ -1094,7 +1102,7 @@ body{overflow-x:hidden;}
 
 </style>
 </head>
-<body>
+<body class="locked">
 <canvas id="fwCanvas"></canvas>
 
 <!-- CELEBRATION MODAL -->
@@ -2553,8 +2561,58 @@ async function exportVocabPNG(){
 // ══════════════════════════════════════════════════════════════════════════
 //  VOCAB OVERRIDE SYSTEM  (localStorage sync)
 // ══════════════════════════════════════════════════════════════════════════
-var EDIT_PASSWORD = '240811';
+var PASSWORD_HASH = '540451d95658eb6d980d04339d172d3cc9657d9d8adee27f74642e51f679ea41';
 var editModeActive = false;
+var pwAction = 'unlock';
+
+function digestSHA256(text){
+  var encoder = new TextEncoder();
+  return window.crypto.subtle.digest('SHA-256', encoder.encode(text)).then(function(hash){
+    return Array.from(new Uint8Array(hash)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+  });
+}
+
+function verifyPassword(password){
+  return digestSHA256(password).then(function(hash){ return hash === PASSWORD_HASH; });
+}
+
+function showPasswordModal(mode){
+  pwAction = mode;
+  var modal = document.getElementById('pwModal');
+  var input = document.getElementById('pwInput');
+  var title = document.querySelector('.pw-title');
+  title.textContent = mode === 'edit' ? '🔐 Nhập mật khẩu để chỉnh sửa' : '🔐 Nhập mật khẩu để vào trang';
+  modal.classList.add('show');
+  input.value = '';
+  input.classList.remove('error');
+  setTimeout(function(){ input.focus(); }, 200);
+}
+
+function closePasswordModal(){
+  if(document.body.classList.contains('locked')) return;
+  document.getElementById('pwModal').classList.remove('show');
+}
+
+async function checkPassword(){
+  var pw = document.getElementById('pwInput').value.trim();
+  if(!pw) return;
+  var ok = await verifyPassword(pw);
+  if(ok){
+    document.getElementById('pwModal').classList.remove('show');
+    if(document.body.classList.contains('locked')) document.body.classList.remove('locked');
+    if(pwAction === 'edit') enableEditMode();
+  } else {
+    var inp = document.getElementById('pwInput');
+    inp.classList.add('error');
+    inp.value = '';
+    inp.placeholder = 'Sai mật khẩu! Thử lại...';
+    setTimeout(function(){ inp.classList.remove('error'); inp.placeholder = 'Nhập mật khẩu...'; }, 1200);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  showPasswordModal('unlock');
+});
 
 function loadVocabOverrides(){
   Object.keys(VOCAB).forEach(function(key){
@@ -2625,13 +2683,10 @@ function renderBasket(){
 
 // ── Edit mode ─────────────────────────────────────────────────────────────
 function requestEditMode(){
-  document.getElementById('pwModal').classList.add('show');
-  document.getElementById('pwInput').value='';
-  document.getElementById('pwInput').classList.remove('error');
-  setTimeout(function(){ document.getElementById('pwInput').focus(); }, 200);
+  showPasswordModal('edit');
 }
 
-function checkPassword(){
+// note: checkPassword is now defined earlier for both initial access and edit mode
   var pw = document.getElementById('pwInput').value.trim();
   if(pw === EDIT_PASSWORD){
     document.getElementById('pwModal').classList.remove('show');
@@ -2874,7 +2929,7 @@ window.addEventListener('load', function(){
       maxlength="10"
       onkeydown="if(event.key==='Enter') checkPassword()">
     <button class="pw-btn" onclick="checkPassword()">Xác nhận ✓</button>
-    <button class="pw-cancel" onclick="document.getElementById('pwModal').classList.remove('show')">Hủy</button>
+    <button class="pw-cancel" onclick="closePasswordModal()">Hủy</button>
   </div>
 </div>
 
