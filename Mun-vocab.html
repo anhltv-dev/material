@@ -1068,6 +1068,9 @@ body.locked > *:not(.pw-modal){
 body.locked{
   overflow:hidden !important;
 }
+body.locked .pw-modal{
+  display:flex !important;
+}
 
 /* Password modal */
 .pw-modal{
@@ -2581,7 +2584,9 @@ function showPasswordModal(mode){
   var modal = document.getElementById('pwModal');
   var input = document.getElementById('pwInput');
   var title = document.querySelector('.pw-title');
+  var sub = document.querySelector('.pw-sub');
   title.textContent = mode === 'edit' ? '🔐 Nhập mật khẩu để chỉnh sửa' : '🔐 Nhập mật khẩu để vào trang';
+  sub.textContent = mode === 'edit' ? 'Nhập mật khẩu để chỉnh sửa bản dịch tiếng Việt' : 'Nhập mật khẩu để truy cập trang';
   modal.classList.add('show');
   input.value = '';
   input.classList.remove('error');
@@ -2613,6 +2618,12 @@ async function checkPassword(){
 document.addEventListener('DOMContentLoaded', function(){
   showPasswordModal('unlock');
 });
+setTimeout(function(){
+  if(document.body.classList.contains('locked')){
+    var modal = document.getElementById('pwModal');
+    if(modal && !modal.classList.contains('show')) showPasswordModal('unlock');
+  }
+}, 500);
 
 function loadVocabOverrides(){
   Object.keys(VOCAB).forEach(function(key){
