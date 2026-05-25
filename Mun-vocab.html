@@ -2,8 +2,17 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mun Vocab – Mun & Mẹ Vân Anh</title>
+<title>Mun Vocab v3 – Mun & Mẹ Vân Anh</title>
+<script>
+(function(){
+  var V=3, m=window.location.search.match(/[?&]v=(\d+)/);
+  if(!m || +m[1]<V) window.location.replace(location.pathname+'?v='+V);
+})();
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════
@@ -628,6 +637,33 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#fff9f0 0
 .shell-tab-btn:hover:not(.active){
   background:#fff8f0;border-color:#ffb3b3;color:#c0392b;
 }
+.shell-tab-btn-review{
+  border:2.5px solid #764ba2 !important;
+  color:#5a2d82 !important;
+  background:linear-gradient(135deg,#f3e8ff,#ede0ff) !important;
+  box-shadow:0 3px 10px rgba(118,75,162,.22) !important;
+  font-weight:800 !important;
+}
+.shell-tab-btn-review:hover:not(.active){
+  background:linear-gradient(135deg,#e9d5ff,#ddc9ff) !important;
+  color:#4a1d6e !important;
+  border-color:#9c4dcc !important;
+  transform:translateY(-2px);
+  box-shadow:0 5px 14px rgba(118,75,162,.32) !important;
+}
+.shell-tab-btn-review.active{
+  background:linear-gradient(135deg,#667eea,#764ba2) !important;
+  color:#fff !important;
+  border-color:transparent !important;
+  box-shadow:0 5px 16px rgba(118,75,162,.5) !important;
+  transform:translateY(-2px);
+}
+.tab-divider-review{
+  width:2px;height:26px;
+  background:linear-gradient(180deg,#667eea55,#764ba255);
+  border-radius:2px;align-self:center;flex-shrink:0;
+  margin:0 2px;
+}
 /* panels */
 .tab-panel{display:none;}
 .tab-panel.active{display:block;}
@@ -775,6 +811,33 @@ body{overflow-x:hidden;}
   font-size:.67rem;font-weight:600;color:#999;
   line-height:1.3;display:block;font-style:italic;
 }
+/* ── sidebar review button ── */
+.sidebar-review-btn-wrap{
+  padding:10px 14px 6px;
+}
+.sidebar-review-btn{
+  width:100%;display:flex;align-items:center;gap:10px;
+  padding:11px 14px;border-radius:14px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  color:#fff;text-align:left;
+  box-shadow:0 4px 14px rgba(118,75,162,.4);
+  transition:all .2s;
+}
+.sidebar-review-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(118,75,162,.55);
+  background:linear-gradient(135deg,#5a6fd6,#6a3d91);
+}
+.sidebar-review-btn.srb-active{
+  box-shadow:0 2px 8px rgba(118,75,162,.35);
+  transform:none;
+  outline:3px solid #fff;
+}
+.srb-icon{font-size:1.5rem;flex-shrink:0;}
+.srb-text{flex:1;display:flex;flex-direction:column;gap:1px;}
+.srb-title{font-size:.92rem;font-weight:900;letter-spacing:.3px;}
+.srb-sub{font-size:.68rem;opacity:.82;font-weight:600;}
+.srb-arrow{font-size:1.3rem;opacity:.7;flex-shrink:0;}
 /* sidebar footer */
 .sidebar-footer{
   padding:10px 14px 14px;
@@ -980,6 +1043,100 @@ body{overflow-x:hidden;}
 @media(max-width:360px){
   .ov-grid{grid-template-columns:1fr;}
 }
+
+/* ═══════════════════════════════════════════════════════
+   TỔNG ÔN — MULTI-TOPIC REVIEW
+═══════════════════════════════════════════════════════ */
+.review-wrap{padding:0 0 24px;}
+.review-hero{
+  border-radius:22px;padding:22px 24px 20px;
+  background:linear-gradient(135deg,#667eea,#764ba2,#f64f59);
+  color:#fff;margin-bottom:20px;
+  box-shadow:0 8px 32px rgba(102,126,234,.38);
+  position:relative;overflow:hidden;
+}
+.review-hero::before{
+  content:'🎯';position:absolute;right:18px;top:14px;
+  font-size:70px;opacity:.17;transform:rotate(-10deg);pointer-events:none;
+}
+.review-hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.35);
+  border-radius:50px;padding:3px 14px;font-size:.7rem;font-weight:800;
+  letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;
+}
+.review-hero-title{
+  font-family:'Baloo 2',cursive;font-size:clamp(1.3rem,3.5vw,1.9rem);
+  font-weight:800;line-height:1.15;margin-bottom:4px;
+}
+.review-hero-sub{font-size:.87rem;opacity:.85;font-weight:600;}
+.review-section{margin-bottom:18px;}
+.review-section-label{
+  font-size:.72rem;font-weight:800;color:#999;
+  text-transform:uppercase;letter-spacing:1.2px;
+  margin-bottom:10px;padding:0 2px;
+}
+.review-topic-chips{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+  gap:8px;margin-bottom:12px;
+}
+.review-topic-chip{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 12px;border-radius:12px;
+  border:2px solid #e8e8e8;background:#fff;
+  cursor:pointer;transition:all .2s cubic-bezier(.34,1.3,.64,1);
+  box-shadow:0 2px 6px rgba(0,0,0,.05);
+  font-size:.8rem;font-weight:700;color:#555;
+  user-select:none;min-width:0;
+}
+.review-topic-chip:hover{
+  transform:translateY(-2px);
+  box-shadow:0 5px 14px rgba(0,0,0,.1);
+  border-color:#c0b0e0;
+}
+.review-topic-chip.rv-sel{
+  color:#fff;border-color:transparent;
+  box-shadow:0 4px 12px rgba(0,0,0,.18);
+  transform:translateY(-1px);
+}
+.rtc-icon{font-size:1.15rem;line-height:1;flex-shrink:0;}
+.rtc-label{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rtc-count{
+  font-size:.65rem;font-weight:800;
+  background:rgba(0,0,0,.13);
+  padding:2px 7px;border-radius:50px;flex-shrink:0;
+}
+.review-chip-actions{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px;}
+.review-chip-action{
+  padding:5px 14px;border-radius:50px;font-size:.76rem;font-weight:700;
+  cursor:pointer;border:1.5px solid #ddd;background:#fff;color:#666;
+  transition:all .2s;
+}
+.review-chip-action:hover{background:#ffd93d;color:#333;border-color:#ffd93d;}
+.review-count-bar{
+  background:#f3e8ff;border:1.5px solid #ce93d8;border-radius:10px;
+  padding:8px 14px;font-size:.82rem;font-weight:700;color:#6c3483;
+  display:flex;align-items:center;gap:8px;margin-bottom:16px;
+}
+.review-count-bar .rcount-num{font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:900;}
+.review-modes{display:flex;gap:8px;flex-wrap:wrap;}
+.review-mode-btn{
+  padding:9px 18px;border-radius:50px;font-size:.83rem;font-weight:700;
+  cursor:pointer;border:2px solid #e0e0e0;background:#fff;color:#555;
+  transition:all .22s;box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+.review-mode-btn:hover:not(.rv-active){border-color:#b39ddb;background:#f3e8ff;color:#6c3483;}
+.review-mode-btn.rv-active{
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  color:#fff;border-color:transparent;
+  box-shadow:0 4px 14px rgba(102,126,234,.4);
+  transform:translateY(-2px);
+}
+.review-game-wrap{margin-top:4px;}
+.review-empty-msg{text-align:center;padding:36px 20px;color:#aaa;}
+.review-empty-msg .rem-icon{font-size:3rem;margin-bottom:12px;}
+.review-empty-msg .rem-text{font-size:.93rem;font-weight:700;line-height:1.5;}
 
 /* ═══════════════════════════════════════════════════════
    BASKET — DYNAMIC + EDITABLE
@@ -1207,7 +1364,7 @@ body.locked .pw-modal{
 <!-- ═══ SIDEBAR ═══ -->
 <aside class="sidebar">
   <div class="sidebar-header">
-    <div class="sidebar-badge">🍎 Ôn thi chuyên</div>
+    <div class="sidebar-badge">🍎 Ôn thi chuyên · v2</div>
     <div class="sidebar-title">✨ MUN vocab</div>
     <div class="sidebar-slogan" id="appSlogan">From Mommy with love 💕</div>
   </div>
@@ -1215,6 +1372,16 @@ body.locked .pw-modal{
     <div class="sidebar-score-chip">⭐ Điểm <span class="sc-val" id="scoreDisplay">0</span></div>
     <div class="sidebar-score-chip">🔥 Streak <span class="sc-val" id="streakDisplay">0</span></div>
     <div class="sidebar-score-chip">✅ Đúng <span class="sc-val" id="correctDisplay">0</span></div>
+  </div>
+  <div class="sidebar-review-btn-wrap">
+    <button class="sidebar-review-btn" id="sidebarReviewBtn" onclick="selectTab('review')">
+      <span class="srb-icon">🎯</span>
+      <span class="srb-text">
+        <span class="srb-title">Tổng ôn</span>
+        <span class="srb-sub">Ôn nhiều chủ đề cùng lúc</span>
+      </span>
+      <span class="srb-arrow">›</span>
+    </button>
   </div>
   <div class="sidebar-topic-section">
     <div class="sidebar-section-label">📚 Chủ đề</div>
@@ -1892,6 +2059,54 @@ body.locked .pw-modal{
     </div>
   </div>
   <div class="tab-panel" id="panel-basket-social_media"><div class="basket-panel-wrap" id="basket-content-social_media"></div></div>
+
+  <!-- ═══ TỔNG ÔN PANEL ═══ -->
+  <div class="tab-panel" id="panel-review">
+    <div class="review-wrap">
+      <div class="review-hero">
+        <div class="review-hero-badge">🎯 Tổng ôn</div>
+        <div class="review-hero-title">Ôn nhiều chủ đề cùng lúc!</div>
+        <div class="review-hero-sub">Chọn chủ đề + chế độ học → bắt đầu ôn tập ngay thôi 🚀</div>
+      </div>
+      <!-- Topic selector -->
+      <div class="review-section">
+        <div class="review-section-label">📚 Chọn chủ đề muốn ôn</div>
+        <div class="review-chip-actions">
+          <button class="review-chip-action" onclick="reviewSelectAll()">✅ Chọn tất cả</button>
+          <button class="review-chip-action" onclick="reviewDeselectAll()">❌ Bỏ chọn tất cả</button>
+        </div>
+        <div class="review-topic-chips" id="reviewTopicChips"></div>
+        <div class="review-count-bar">
+          <span>📊</span>
+          <span><span class="rcount-num" id="reviewWordCount">0</span> từ từ <span class="rcount-num" id="reviewTopicCount">0</span> chủ đề đã chọn</span>
+        </div>
+      </div>
+      <!-- Mode selector -->
+      <div class="review-section">
+        <div class="review-section-label">🎮 Chọn chế độ học</div>
+        <div class="review-modes" id="reviewModes"></div>
+      </div>
+      <!-- Game area -->
+      <div class="review-game-wrap">
+        <div class="game-area" style="padding:0;max-width:100%;">
+          <div id="reviewGameCard" class="card pop-in">
+            <div class="card-accent" style="background:linear-gradient(90deg,#667eea,#764ba2,#f64f59)"></div>
+            <div class="card-body" id="reviewGameBody">
+              <div class="review-empty-msg">
+                <div class="rem-icon">🎯</div>
+                <div class="rem-text">Chọn chủ đề và chế độ học ở trên để bắt đầu!</div>
+              </div>
+            </div>
+          </div>
+          <div class="stats-panel">
+            <div class="stat-box"><div class="stat-num" id="r-s1">0</div><div class="stat-label">Đã thử</div></div>
+            <div class="stat-box"><div class="stat-num" id="r-s2">0</div><div class="stat-label">Trả lời đúng</div></div>
+            <div class="stat-box"><div class="stat-num" id="r-s3">0%</div><div class="stat-label">Tỉ lệ đúng</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div><!-- /allPanels -->
 
@@ -5788,12 +6003,16 @@ function buildTabBar(){
   bar.innerHTML = '';
   TABS.forEach(function(tab){
     var b = document.createElement('button');
-    b.className = 'shell-tab-btn' + (tab.id===activeTab?' active':'');
+    b.className = 'shell-tab-btn' +
+      (tab.id===activeTab?' active':'') +
+      (tab.id==='review'?' shell-tab-btn-review':'');
     b.textContent = tab.label;
-    // Color active tab per topic
     if(tab.id===activeTab){
-      b.style.background = activeTopic.gradient;
-      b.style.borderColor = 'transparent';
+      if(tab.id!=='review'){
+        b.style.background = activeTopic.gradient;
+        b.style.borderColor = 'transparent';
+        b.style.color = '#fff';
+      }
     }
     b.onclick = function(){ selectTab(tab.id); };
     bar.appendChild(b);
@@ -5830,6 +6049,10 @@ function selectTab(tabId){
 //  SHOW ACTIVE PANEL
 // ══════════════════════════════════════════════════════════════════════════
 function showActivePanel(){
+  // Update sidebar review button active state
+  var srbBtn = document.getElementById('sidebarReviewBtn');
+  if(srbBtn) srbBtn.classList.toggle('srb-active', activeTab==='review');
+
   // Hide all panels
   document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
 
@@ -5840,11 +6063,15 @@ function showActivePanel(){
     document.getElementById(activeTopic.storyPanel).classList.add('active');
   } else if(activeTab==='basket'){
     document.getElementById(activeTopic.basketPanel).classList.add('active');
-    // Re-init basket export button IDs if needed
     rebindBasketButtons();
+  } else if(activeTab==='review'){
+    document.getElementById('panel-review').classList.add('active');
+    if(reviewSelectedTopics.length>0){
+      currentList=shuffle(getReviewList()); fcIndex=0; fcFlipped=false;
+      render();
+    }
   } else {
     document.getElementById('panel-game').classList.add('active');
-    // Update game card color to match topic
     var gc = document.getElementById('gameCard');
     if(gc) gc.className = gc.className.replace(/patriot|style/g,'').trim() + ' ' + activeTopic.vocabKey;
   }
@@ -5866,6 +6093,20 @@ function parseEx(txt){
   return txt.replace(/\*\*([^*]+)\*\*/g, '<span class="hl-term">$1</span>');
 }
 
+// buildTopicMeta — returns the <div class="question-meta">…</div> HTML
+// handles both normal mode (patriot/style) and review mode (any topic)
+function buildTopicMeta(item, numTag, overrideLabel){
+  if(activeTab==='review'){
+    var color=item._rColor||'#6c3483';
+    var label=item._rLabel||'Tổng ôn';
+    var icon=item._rIcon||'📚';
+    return '<div class="question-meta"><span class="topic-tag" style="background:'+color+'18;color:'+color+'">'+icon+' '+label+'</span><span class="q-num">'+(numTag||'')+'</span></div>';
+  }
+  var tp=topicOf(item);
+  var lbl=overrideLabel||(tp==='patriot'?'🇻🇳 Lịch sử & Yêu nước':'💜 Phong cách & Bản thân');
+  return '<div class="question-meta"><span class="topic-tag '+tp+'">'+lbl+'</span><span class="q-num">'+(numTag||'')+'</span></div>';
+}
+
 var currentTopic='patriot', currentMode='flashEN';
 var score=0, streak=0, totalCorrect=0, totalAttempts=0;
 var fcIndex=0, fcFlipped=false;
@@ -5874,6 +6115,17 @@ var matchState={pool:[],selected:null,matched:[]};
 var fillItem=null, hintUsed=false;
 var currentList=[];
 var correctCount=0;
+
+// ── TỔNG ÔN state ──
+var reviewSelectedTopics = [];   // topic IDs currently selected
+var reviewMode = 'flashEN';      // active review sub-mode
+var REVIEW_MODES = [
+  {id:'flashEN', label:'🇬🇧 Flashcard EN'},
+  {id:'flashVN', label:'🇻🇳 Flashcard VN'},
+  {id:'quiz',    label:'🧠 Trắc nghiệm'},
+  {id:'match',   label:'🔗 Ghép đôi'},
+  {id:'fill',    label:'✏️ Điền từ'}
+];
 
 function getList(){
   if(currentTopic==='patriot') return VOCAB.patriot.slice();
@@ -5884,17 +6136,23 @@ function topicOf(item){ return (currentTopic==='both'&&item._topic)?'style': cur
 function shuffle(arr){ var a=arr.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 
 function updateScore(){
-  document.getElementById('scoreDisplay').textContent=score;
-  document.getElementById('streakDisplay').textContent=streak;
-  document.getElementById('correctDisplay').textContent=totalCorrect;
-  document.getElementById('s1').textContent=totalAttempts;
-  document.getElementById('s2').textContent=totalCorrect;
-  document.getElementById('s3').textContent=totalAttempts?Math.round(100*totalCorrect/totalAttempts)+'%':'0%';
+  var el, pct=totalAttempts?Math.round(100*totalCorrect/totalAttempts)+'%':'0%';
+  el=document.getElementById('scoreDisplay');   if(el) el.textContent=score;
+  el=document.getElementById('streakDisplay');  if(el) el.textContent=streak;
+  el=document.getElementById('correctDisplay'); if(el) el.textContent=totalCorrect;
+  el=document.getElementById('s1'); if(el) el.textContent=totalAttempts;
+  el=document.getElementById('s2'); if(el) el.textContent=totalCorrect;
+  el=document.getElementById('s3'); if(el) el.textContent=pct;
+  el=document.getElementById('r-s1'); if(el) el.textContent=totalAttempts;
+  el=document.getElementById('r-s2'); if(el) el.textContent=totalCorrect;
+  el=document.getElementById('r-s3'); if(el) el.textContent=pct;
 }
 function setCard(html,topic){
-  var c=document.getElementById('gameCard');
-  c.className='card pop-in '+(topic||'');
-  document.getElementById('gameBody').innerHTML=html;
+  var isRev=(activeTab==='review');
+  var c=document.getElementById(isRev?'reviewGameCard':'gameCard');
+  if(!c) return;
+  c.className='card pop-in '+(isRev?'':topic||'');
+  document.getElementById(isRev?'reviewGameBody':'gameBody').innerHTML=html;
 }
 function progressHTML(cur,tot){
   var p=Math.round(100*cur/tot);
@@ -5926,10 +6184,9 @@ function renderFlashEN(){
   if(!currentList.length) currentList=shuffle(getList());
   var item=currentList[fcIndex%currentList.length];
   var tp=topicOf(item);
-  var tagLabel=tp==='patriot'?'🇻🇳 Lịch sử & Yêu nước':'💜 Phong cách & Bản thân';
   var numTag=(fcIndex%currentList.length+1)+' / '+currentList.length;
   var html=
-    '<div class="question-meta"><span class="topic-tag '+tp+'">'+tagLabel+'</span><span class="q-num">'+numTag+'</span></div>'
+    buildTopicMeta(item,numTag)
     +'<div class="flashcard-wrap" onclick="flipCard()">'
     +'<div class="flashcard'+(fcFlipped?' flipped':'')+'" id="fc">'
     +'<div class="fc-face fc-front-en">'
@@ -5956,10 +6213,9 @@ function renderFlashVN(){
   if(!currentList.length) currentList=shuffle(getList());
   var item=currentList[fcIndex%currentList.length];
   var tp=topicOf(item);
-  var tagLabel=tp==='patriot'?'🇻🇳 Lịch sử & Yêu nước':'💜 Phong cách & Bản thân';
   var numTag=(fcIndex%currentList.length+1)+' / '+currentList.length;
   var html=
-    '<div class="question-meta"><span class="topic-tag '+tp+'">'+tagLabel+'</span><span class="q-num">'+numTag+'</span></div>'
+    buildTopicMeta(item,numTag)
     +'<div class="flashcard-wrap" onclick="flipCard()">'
     +'<div class="flashcard'+(fcFlipped?' flipped':'')+'" id="fc">'
     +'<div class="fc-face fc-front-en" style="background:linear-gradient(135deg,#fff8e1,#fff3cd);">'
@@ -6064,7 +6320,6 @@ function renderQuiz(){
   quizItem=currentList[Math.floor(Math.random()*currentList.length)];
   quizAnswered=false;
   var tp=topicOf(quizItem);
-  var tagLabel=tp==='patriot'?'🇻🇳 Lịch sử & Yêu nước':'💜 Phong cách & Bản thân';
   var modeQ=Math.random()>.5?'w2m':'m2w';
   var wrongs=shuffle(currentList.filter(function(v){ return v!==quizItem; })).slice(0,3);
   quizOpts=shuffle([quizItem].concat(wrongs));
@@ -6081,7 +6336,7 @@ function renderQuiz(){
     optsHtml+='<button class="opt-btn" id="opt'+i+'" onclick="checkQuiz('+i+')">'+getOptText(quizOpts[i])+'</button>';
   }
   var html=
-    '<div class="question-meta"><span class="topic-tag '+tp+'">'+tagLabel+'</span><span class="q-num">Câu hỏi ngẫu nhiên</span></div>'
+    buildTopicMeta(quizItem,'Câu hỏi ngẫu nhiên')
     +'<div class="quiz-question">'+qText+'</div>'
     +'<div class="options-grid">'+optsHtml+'</div>'
     +'<div class="result-msg" id="resultMsg"></div>'
@@ -6125,7 +6380,7 @@ function renderMatch(){
   var mHtml='<div class="match-title">💬 Nghĩa</div>';
   for(var i=0;i<meanings.length;i++) mHtml+='<div class="match-item" id="mm'+i+'" data-t="m" data-i="'+pool.indexOf(meanings[i])+'" onclick="matchClick(this)">'+meanings[i].meaning+'</div>';
   var html=
-    '<div class="question-meta"><span class="topic-tag '+tp+'">🔗 Ghép đôi</span><span class="q-num">Ghép đúng 5 cặp</span></div>'
+    buildTopicMeta(pool[0],'Ghép đúng 5 cặp','🔗 Ghép đôi')
     +'<div class="match-grid"><div class="match-col">'+wHtml+'</div><div class="match-col">'+mHtml+'</div></div>'
     +'<div class="result-msg" id="matchMsg"></div>'
     +'<button class="quiz-next" id="matchNew" onclick="renderMatch()">Bộ từ mới 🔄</button>';
@@ -6167,9 +6422,8 @@ function renderFill(){
   var pool=shuffle(getList());
   fillItem=pool[0]; hintUsed=false;
   var tp=topicOf(fillItem);
-  var tagLabel=tp==='patriot'?'🇻🇳 Lịch sử & Yêu nước':'💜 Phong cách & Bản thân';
   var html=
-    '<div class="question-meta"><span class="topic-tag '+tp+'">'+tagLabel+'</span><span class="q-num">Điền từ vào chỗ trống</span></div>'
+    buildTopicMeta(fillItem,'Điền từ vào chỗ trống')
     +'<div style="font-size:2.2rem;text-align:center;margin-bottom:9px;">'+fillItem.emoji+'</div>'
     +'<div class="fill-sentence">Nghĩa là:<br><br>"<span style="color:#c0392b;font-weight:700">'+fillItem.meaning+'</span>"<br><br>Từ cần điền: <span class="blank" id="blankShow">____________</span></div>'
     +'<input class="fill-input" id="fillInput" placeholder="Nhập từ tiếng Anh..." autocomplete="off" onkeydown="if(event.key===\'Enter\') checkFill()" />'
@@ -6278,15 +6532,40 @@ function renderOverview(){
   wrap.innerHTML = heroHtml + gridHtml;
 }
 
-// Override getList to use activeTopic
+// getList — returns vocab for current context
 function getList(){
+  if(activeTab==='review') return getReviewList();
   return VOCAB[activeTopic.vocabKey].slice();
+}
+function getReviewList(){
+  var list=[];
+  TOPICS.forEach(function(t){
+    if(reviewSelectedTopics.indexOf(t.id)>-1){
+      (VOCAB[t.vocabKey]||[]).forEach(function(v){
+        list.push(Object.assign({},v,{_rTopic:t.id,_rLabel:t.label,_rColor:t.color,_rIcon:t.icon}));
+      });
+    }
+  });
+  return list;
 }
 
 // ══════════════════════════════════════════════════════════════════════════
 //  MODE BRIDGE — render() maps activeTab → game engine functions
 // ══════════════════════════════════════════════════════════════════════════
 function render(){
+  if(activeTab==='review'){
+    if(!reviewSelectedTopics.length||!currentList.length){
+      var el=document.getElementById('reviewGameBody');
+      if(el) el.innerHTML='<div class="review-empty-msg"><div class="rem-icon">📚</div><div class="rem-text">Hãy chọn ít nhất 1 chủ đề để bắt đầu ôn tập!</div></div>';
+      return;
+    }
+    if(reviewMode==='flashEN')     renderFlashEN();
+    else if(reviewMode==='flashVN') renderFlashVN();
+    else if(reviewMode==='quiz')    renderQuiz();
+    else if(reviewMode==='match')   renderMatch();
+    else                            renderFill();
+    return;
+  }
   if(activeTab==='overview') renderOverview();
   else if(activeTab==='flashEN') renderFlashEN();
   else if(activeTab==='flashVN') renderFlashVN();
@@ -6299,11 +6578,110 @@ function render(){
 function setMode(m){ activeTab=m; render(); }
 
 // ══════════════════════════════════════════════════════════════════════════
+//  TỔNG ÔN — REVIEW PANEL MANAGEMENT
+// ══════════════════════════════════════════════════════════════════════════
+
+function buildReviewPanel(){
+  reviewSelectedTopics = TOPICS.map(function(t){ return t.id; });
+  buildReviewTopicChips();
+  buildReviewModeBar();
+  updateReviewCountBar();
+}
+
+function buildReviewTopicChips(){
+  var bar = document.getElementById('reviewTopicChips');
+  if(!bar) return;
+  bar.innerHTML = '';
+  TOPICS.forEach(function(t){
+    var isSel = reviewSelectedTopics.indexOf(t.id) > -1;
+    var chip = document.createElement('div');
+    chip.className = 'review-topic-chip' + (isSel ? ' rv-sel' : '');
+    if(isSel) chip.style.background = t.gradient;
+    chip.dataset.id = t.id;
+    chip.innerHTML =
+      '<span class="rtc-icon">'+t.icon+'</span>'+
+      '<span class="rtc-label">'+t.label+'</span>'+
+      '<span class="rtc-count">'+(VOCAB[t.vocabKey]||[]).length+'</span>';
+    chip.onclick = function(){ selectReviewTopic(t.id); };
+    bar.appendChild(chip);
+  });
+}
+
+function buildReviewModeBar(){
+  var bar = document.getElementById('reviewModes');
+  if(!bar) return;
+  bar.innerHTML = '';
+  REVIEW_MODES.forEach(function(m){
+    var btn = document.createElement('button');
+    btn.className = 'review-mode-btn' + (m.id === reviewMode ? ' rv-active' : '');
+    btn.textContent = m.label;
+    btn.onclick = function(){ selectReviewMode(m.id); };
+    bar.appendChild(btn);
+  });
+}
+
+function updateReviewCountBar(){
+  var wordCount = 0;
+  var topicCount = reviewSelectedTopics.length;
+  TOPICS.forEach(function(t){
+    if(reviewSelectedTopics.indexOf(t.id) > -1){
+      wordCount += (VOCAB[t.vocabKey]||[]).length;
+    }
+  });
+  var el;
+  el = document.getElementById('reviewWordCount');  if(el) el.textContent = wordCount;
+  el = document.getElementById('reviewTopicCount'); if(el) el.textContent = topicCount;
+}
+
+function selectReviewTopic(id){
+  var idx = reviewSelectedTopics.indexOf(id);
+  if(idx > -1) reviewSelectedTopics.splice(idx, 1);
+  else reviewSelectedTopics.push(id);
+  buildReviewTopicChips();
+  updateReviewCountBar();
+  if(reviewSelectedTopics.length > 0 && activeTab === 'review'){
+    currentList = shuffle(getReviewList()); fcIndex = 0; fcFlipped = false;
+    render();
+  } else if(reviewSelectedTopics.length === 0){
+    var el = document.getElementById('reviewGameBody');
+    if(el) el.innerHTML = '<div class="review-empty-msg"><div class="rem-icon">📚</div><div class="rem-text">Hãy chọn ít nhất 1 chủ đề để bắt đầu ôn tập!</div></div>';
+  }
+}
+
+function selectReviewMode(mode){
+  reviewMode = mode;
+  buildReviewModeBar();
+  if(reviewSelectedTopics.length > 0 && activeTab === 'review'){
+    currentList = shuffle(getReviewList()); fcIndex = 0; fcFlipped = false;
+    render();
+  }
+}
+
+function reviewSelectAll(){
+  reviewSelectedTopics = TOPICS.map(function(t){ return t.id; });
+  buildReviewTopicChips();
+  updateReviewCountBar();
+  if(activeTab === 'review'){
+    currentList = shuffle(getReviewList()); fcIndex = 0; fcFlipped = false;
+    render();
+  }
+}
+
+function reviewDeselectAll(){
+  reviewSelectedTopics = [];
+  buildReviewTopicChips();
+  updateReviewCountBar();
+  var el = document.getElementById('reviewGameBody');
+  if(el) el.innerHTML = '<div class="review-empty-msg"><div class="rem-icon">📚</div><div class="rem-text">Hãy chọn ít nhất 1 chủ đề để bắt đầu ôn tập!</div></div>';
+}
+
+// ══════════════════════════════════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════════════════════════════════
 currentList = shuffle(getList());
 buildTopicBar();
 buildTabBar();
+buildReviewPanel();
 showActivePanel();
 </script>
 
