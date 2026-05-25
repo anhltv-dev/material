@@ -1335,6 +1335,18 @@ body.locked .pw-modal{
 }
 .pw-btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 10px 28px rgba(255,107,107,.45);}
 .pw-btn:active{transform:translateY(0) scale(.98);}
+.pw-remember{
+  display:flex;align-items:center;gap:8px;cursor:pointer;
+  font-size:.78rem;font-weight:700;color:#9c27b0;
+  margin:4px 0 2px;padding:6px 10px;border-radius:50px;
+  background:rgba(156,39,176,.07);
+  transition:background .2s;
+  user-select:none;
+}
+.pw-remember:hover{background:rgba(156,39,176,.13);}
+.pw-remember input[type=checkbox]{
+  width:16px;height:16px;accent-color:#e91e63;cursor:pointer;flex-shrink:0;
+}
 .pw-cancel{
   background:none;border:none;color:#bbb;font-size:.78rem;
   cursor:pointer;margin-top:10px;display:block;width:100%;
@@ -2063,11 +2075,6 @@ body.locked .pw-modal{
   <!-- ═══ TỔNG ÔN PANEL ═══ -->
   <div class="tab-panel" id="panel-review">
     <div class="review-wrap">
-      <div class="review-hero">
-        <div class="review-hero-badge">🎯 Tổng ôn</div>
-        <div class="review-hero-title">Ôn nhiều chủ đề cùng lúc!</div>
-        <div class="review-hero-sub">Chọn chủ đề + chế độ học → bắt đầu ôn tập ngay thôi 🚀</div>
-      </div>
       <!-- Topic selector -->
       <div class="review-section">
         <div class="review-section-label">📚 Chọn chủ đề muốn ôn</div>
@@ -2076,10 +2083,6 @@ body.locked .pw-modal{
           <button class="review-chip-action" onclick="reviewDeselectAll()">❌ Bỏ chọn tất cả</button>
         </div>
         <div class="review-topic-chips" id="reviewTopicChips"></div>
-        <div class="review-count-bar">
-          <span>📊</span>
-          <span><span class="rcount-num" id="reviewWordCount">0</span> từ từ <span class="rcount-num" id="reviewTopicCount">0</span> chủ đề đã chọn</span>
-        </div>
       </div>
       <!-- Mode selector -->
       <div class="review-section">
@@ -6024,6 +6027,11 @@ function buildTabBar(){
 // ══════════════════════════════════════════════════════════════════════════
 function selectTopic(topic){
   activeTopic = topic;
+  // Khi đang ở Tổng ôn, click chủ đề → tự chuyển về mode học cuối cùng
+  if(activeTab === 'review'){
+    activeTab = lastStudyTab;
+    buildTabBar();
+  }
   currentList = shuffle(getList());
   fcIndex = 0; fcFlipped = false;
   buildTopicBar();
@@ -6035,6 +6043,7 @@ function selectTopic(topic){
 //  SELECT TAB
 // ══════════════════════════════════════════════════════════════════════════
 function selectTab(tabId){
+  if(tabId !== 'review') lastStudyTab = tabId;
   activeTab = tabId;
   buildTabBar();
   showActivePanel();
@@ -6052,6 +6061,15 @@ function showActivePanel(){
   // Update sidebar review button active state
   var srbBtn = document.getElementById('sidebarReviewBtn');
   if(srbBtn) srbBtn.classList.toggle('srb-active', activeTab==='review');
+
+  // Clear opposite game body to prevent duplicate-ID conflicts (getElementById returns first match)
+  if(activeTab === 'review'){
+    var _gb = document.getElementById('gameBody');
+    if(_gb) _gb.innerHTML = '';
+  } else {
+    var _rgb = document.getElementById('reviewGameBody');
+    if(_rgb) _rgb.innerHTML = '';
+  }
 
   // Hide all panels
   document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
@@ -6097,10 +6115,7 @@ function parseEx(txt){
 // handles both normal mode (patriot/style) and review mode (any topic)
 function buildTopicMeta(item, numTag, overrideLabel){
   if(activeTab==='review'){
-    var color=item._rColor||'#6c3483';
-    var label=item._rLabel||'Tổng ôn';
-    var icon=item._rIcon||'📚';
-    return '<div class="question-meta"><span class="topic-tag" style="background:'+color+'18;color:'+color+'">'+icon+' '+label+'</span><span class="q-num">'+(numTag||'')+'</span></div>';
+    return numTag ? '<div class="question-meta"><span class="q-num">'+numTag+'</span></div>' : '';
   }
   var tp=topicOf(item);
   var lbl=overrideLabel||(tp==='patriot'?'🇻🇳 Lịch sử & Yêu nước':'💜 Phong cách & Bản thân');
@@ -6119,6 +6134,7 @@ var correctCount=0;
 // ── TỔNG ÔN state ──
 var reviewSelectedTopics = [];   // topic IDs currently selected
 var reviewMode = 'flashEN';      // active review sub-mode
+var lastStudyTab = 'flashEN';    // last non-review tab, for switching back
 var REVIEW_MODES = [
   {id:'flashEN', label:'🇬🇧 Flashcard EN'},
   {id:'flashVN', label:'🇻🇳 Flashcard VN'},
@@ -6759,6 +6775,8 @@ function showPasswordModal(mode){
   sub.textContent = mode === 'edit' ? 'Nhập password để chỉnh sửa bản dịch ✏️💕' : 'Chúng mình cùng bắt đầu học bài nào~ 📚✨💕';
   var btn = document.getElementById('pwBtnConfirm');
   if(btn) btn.textContent = mode === 'edit' ? 'Chỉnh sửa thôi! ✏️' : 'Vào học thôi! 🌟';
+  var rememberLabel = document.getElementById('pwRememberLabel');
+  if(rememberLabel) rememberLabel.style.display = mode === 'edit' ? 'none' : '';
   modal.classList.add('show');
   input.value = '';
   input.classList.remove('error');
@@ -6777,6 +6795,11 @@ async function checkPassword(){
   if(ok){
     document.getElementById('pwModal').classList.remove('show');
     if(document.body.classList.contains('locked')) document.body.classList.remove('locked');
+    if(pwAction === 'unlock'){
+      var remember = document.getElementById('pwRemember');
+      if(remember && remember.checked) localStorage.setItem('munVocabAuth', '1');
+      else localStorage.removeItem('munVocabAuth');
+    }
     if(pwAction === 'edit') enableEditMode();
   } else {
     var inp = document.getElementById('pwInput');
@@ -6788,7 +6811,11 @@ async function checkPassword(){
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-  showPasswordModal('unlock');
+  if(localStorage.getItem('munVocabAuth') === '1'){
+    document.body.classList.remove('locked');
+  } else {
+    showPasswordModal('unlock');
+  }
 });
 setTimeout(function(){
   if(document.body.classList.contains('locked')){
@@ -7105,6 +7132,10 @@ window.addEventListener('load', function(){
         placeholder="💕 password... 💕"
         maxlength="10"
         onkeydown="if(event.key==='Enter') checkPassword()">
+      <label class="pw-remember" id="pwRememberLabel">
+        <input type="checkbox" id="pwRemember" checked>
+        <span>Nhớ mật khẩu trên thiết bị này 💾</span>
+      </label>
       <button class="pw-btn" id="pwBtnConfirm" onclick="checkPassword()">Vào học thôi! 🌟</button>
       <button class="pw-cancel" onclick="closePasswordModal()">Để sau đã... 🌙</button>
     </div>
