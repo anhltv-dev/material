@@ -324,6 +324,13 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#fff9f0 0
     font-weight:900;
     color:#e26d5a;
   }
+  /* story panel header */
+  .story-header{text-align:center;padding:22px 20px 16px;border-bottom:2px dashed rgba(0,0,0,.07);margin-bottom:4px;}
+  .story-kicker{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.85);border:1.5px solid rgba(0,0,0,.1);border-radius:50px;padding:5px 16px;font-size:.72rem;font-weight:700;color:#555;letter-spacing:.5px;margin-bottom:12px;}
+  .story-title{font-family:'Baloo 2',cursive;font-size:clamp(1.2rem,3vw,1.7rem);font-weight:800;color:#1a1a2e;line-height:1.25;margin-bottom:9px;}
+  .story-subtitle{font-size:clamp(.82rem,2vw,.95rem);color:#c0392b;font-weight:700;font-style:italic;line-height:1.5;margin:0;}
+  .story-chip-row{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:12px;}
+  .story-chip{font-size:.65rem;font-weight:800;letter-spacing:.9px;text-transform:uppercase;padding:4px 13px;border-radius:50px;background:rgba(0,0,0,.06);color:#555;border:1.5px solid rgba(0,0,0,.1);}
   .vocab {
     display:inline-flex;
     vertical-align:middle;
@@ -1360,6 +1367,11 @@ body.locked .pw-modal{
   <div class="tab-panel" id="panel-story-mental">
     <div class="story-panel-wrap">
 <section class="story-shell">
+      <div class="story-header">
+        <div class="story-kicker">🧠 Mental Health Story</div>
+        <h2 class="story-title">Lá thư gửi Tâm</h2>
+        <p class="story-subtitle">Khi trái tim cũng cần được lắng nghe</p>
+      </div>
       <div class="story">
 <p>Tâm thân mến, tối nay An ngồi bên bàn học rất lâu. Sách vẫn mở trước mặt, nhưng trong lòng An cứ nặng như có một đám mây nhỏ. Dạo gần đây, An nhận ra mình có nhiều lúc rất nhạy cảm trước áp lực, giống như đang có <span class="vocab"><span class="vocab-img">💙</span><span class="vocab-text"><span class="vi">sự dễ tổn thương về cảm xúc</span><span class="en">emotional vulnerability</span></span></span> mà trước đây An không dám thừa nhận.</p>
 <p>Mỗi ngày An đều học, làm bài, sửa đề, rồi lại tự hỏi liệu mình đã đủ cố gắng chưa. Những lo lắng nhỏ cứ tích lại từng chút một, tạo thành <span class="vocab"><span class="vocab-img">⏳</span><span class="vocab-text"><span class="vi">sự tích tụ căng thẳng kéo dài</span><span class="en">prolonged stress accumulation</span></span></span> khiến An thấy mệt hơn cả một bài toán khó.</p>
@@ -1384,6 +1396,11 @@ body.locked .pw-modal{
   <div class="tab-panel" id="panel-story-environment">
     <div class="story-panel-wrap">
 <section class="story-shell">
+      <div class="story-header">
+        <div class="story-kicker">🌍 Environment Story</div>
+        <h2 class="story-title">Bài học xanh của bố</h2>
+        <p class="story-subtitle">Mun, Mì và những lựa chọn nhỏ</p>
+      </div>
       <div class="story">
 <p>Sáng chủ nhật, bố chở Mun và Mì đi ngang qua một con đường đông xe. Mì ngước lên nhìn bầu trời rồi hỏi: "Bố ơi, sao hôm nay trời xám thế?" Bố mỉm cười và chỉ cho hai chị em thấy làn khói từ xe cộ, đó chính là <span class="vocab"><span class="vocab-img">🚗</span><span class="vocab-text"><span class="vi">khí thải phương tiện</span><span class="en">vehicle emissions</span></span></span> đang làm không khí trong thành phố nặng nề hơn.</p>
 <p>Đến đoạn ngã tư, xe máy, ô tô và xe buýt chen nhau chậm chạp. Bố nói: "Khi quá nhiều xe cùng đứng lại trên đường, chúng ta gặp <span class="vocab"><span class="vocab-img">🚦</span><span class="vocab-text"><span class="vi">ùn tắc giao thông</span><span class="en">traffic congestion</span></span></span> vừa mất thời gian, vừa làm nhiên liệu bị đốt nhiều hơn."</p>
@@ -1412,6 +1429,11 @@ body.locked .pw-modal{
   <div class="tab-panel" id="panel-story-education">
     <div class="story-panel-wrap">
 <section class="story-shell">
+      <div class="story-header">
+        <div class="story-kicker">📚 Education Story</div>
+        <h2 class="story-title">Một bài thi thử không nói hết con là ai</h2>
+        <p class="story-subtitle">Cuộc trò chuyện giữa bố và Bống sau kết quả thi thử vào 10</p>
+      </div>
       <div class="story">
 <p>Bống cầm tờ kết quả thi thử vào lớp 10 về nhà. Điểm số thấp hơn năng lực thật của em, thấp hơn cả những lần em làm đề ở nhà. Em không khóc, nhưng trong lòng có một <span class="vocab"><span class="vocab-img">😟</span><span class="vocab-text"><span class="vi">nỗi sợ thất bại</span><span class="en">fear of failure</span></span></span> lặng lẽ lớn lên, khiến em chỉ muốn giấu bài kiểm tra thật sâu trong cặp.</p>
 <p>Điều làm Bống buồn nhất không chỉ là điểm thấp. Em sợ rằng một con điểm sẽ khiến mọi người nghĩ em không đủ giỏi. Lúc ấy, Bống rơi vào cảm giác <span class="vocab"><span class="vocab-img">🏅</span><span class="vocab-text"><span class="vi">giá trị bản thân dựa trên thành tích</span><span class="en">achievement-based self-worth</span></span></span> như thể bản thân em bị thu nhỏ lại chỉ còn bằng một con số đỏ trên giấy.</p>
@@ -1437,6 +1459,17 @@ body.locked .pw-modal{
   <div class="tab-panel" id="panel-story-ai">
     <div class="story-panel-wrap">
 <section class="story-shell">
+      <div class="story-header">
+        <div class="story-kicker">🤖 Artificial Intelligence Story</div>
+        <h2 class="story-title">Chiếc nút trả lời nhanh</h2>
+        <p class="story-subtitle">Bài học của Nam khi AI biết mọi thứ quá nhanh</p>
+        <div class="story-chip-row">
+          <span class="story-chip">AI TOOL</span>
+          <span class="story-chip">THINK FIRST</span>
+          <span class="story-chip">USE WISELY</span>
+          <span class="story-chip">HUMAN LEADS</span>
+        </div>
+      </div>
       <div class="story">
 <p>Nam phát hiện ra Nova trong một buổi tối làm bài tập. Chỉ cần gõ một câu hỏi, Nova lập tức đưa ra đáp án, nhanh đến mức Nam tưởng như mình vừa tìm được một chiếc nút bí mật của thế giới. Em thích thú với <span class="vocab"><span class="vocab-img">⏱️</span><span class="vocab-text"><span class="vi">sự tiện lợi của hỗ trợ AI tức thì</span><span class="en">convenience of instant AI-generated assistance</span></span></span> vì mọi việc bỗng trở nên nhẹ hơn rất nhiều.</p>
 <p>Trước đây, gặp một câu hỏi khó, Nam phải lật sách, hỏi bạn hoặc đợi đến buổi học sau. Bây giờ, Nova đưa ra <span class="vocab"><span class="vocab-img">💬</span><span class="vocab-text"><span class="vi">câu trả lời tức thì</span><span class="en">immediate answers</span></span></span> gần như không cần chờ đợi. Nam vui lắm, nhưng em chưa biết rằng thứ gì quá nhanh cũng có thể khiến người ta quên mất cách đi chậm để hiểu sâu.</p>
@@ -1464,6 +1497,11 @@ body.locked .pw-modal{
   <div class="tab-panel" id="panel-story-online">
     <div class="story-panel-wrap">
 <section class="story-shell">
+      <div class="story-header">
+        <div class="story-kicker">💻 Online Learning Story</div>
+        <h2 class="story-title">Sau mùa học online</h2>
+        <p class="story-subtitle">Bài học mà màn hình không dạy hết</p>
+      </div>
       <div class="story">
 <p>Khi Covid-19 xuất hiện, lớp của Nam không còn tiếng trống trường quen thuộc. Buổi sáng, thay vì khoác cặp đến lớp, Nam mở máy tính và bấm vào một đường link. Cả lớp bước vào các <span class="vocab"><span class="vocab-img">🖥️</span><span class="vocab-text"><span class="vi">nền tảng học trực tuyến</span><span class="en">virtual learning platforms</span></span></span> nơi khuôn mặt thầy cô và bạn bè hiện lên trong từng ô vuông nhỏ.</p>
 <p>Chỉ trong một thời gian ngắn, trường học thay đổi rất nhanh. Bài giảng, bài tập, điểm danh và tài liệu đều được đưa lên mạng. Nam nghe cô Hạnh nói rằng dịch bệnh đã khiến giáo dục chứng kiến <span class="vocab"><span class="vocab-img">🚀</span><span class="vocab-text"><span class="vi">sự phát triển công nghệ tăng tốc</span><span class="en">accelerated technological advancement</span></span></span> vì nhiều điều tưởng như xa lạ bỗng trở thành thói quen hằng ngày.</p>
@@ -1494,6 +1532,17 @@ body.locked .pw-modal{
   <div class="tab-panel" id="panel-story-youth">
     <div class="story-panel-wrap">
 <section class="story-shell">
+      <div class="story-header">
+        <div class="story-kicker">💖 Youth Culture Story</div>
+        <h2 class="story-title">Chiếc gương biết đếm lượt thích</h2>
+        <p class="story-subtitle">Một câu chuyện về sống ảo, bản sắc và giá trị thật của chính mình</p>
+        <div class="story-chip-row">
+          <span class="story-chip">BE REAL</span>
+          <span class="story-chip">LIKE ≠ VALUE</span>
+          <span class="story-chip">LIVE FIRST</span>
+          <span class="story-chip">POST LATER</span>
+        </div>
+      </div>
       <div class="story">
 <p>Mi tải một ứng dụng mới tên là MirrorMe sau khi thấy một influencer nổi tiếng giới thiệu. Ứng dụng ấy xuất hiện khắp nơi, từ video ngắn đến story, như một phần của <span class="vocab"><span class="vocab-img">📣</span><span class="vocab-text"><span class="vi">hệ sinh thái giải trí xoay quanh influencer</span><span class="en">influencer-centered entertainment ecosystems</span></span></span> nơi người nổi tiếng online dẫn dắt xu hướng, nội dung và cả cách giới trẻ chú ý đến bản thân.</p>
 <p>Điều khiến Mi tin ngay không phải chỉ vì app đẹp, mà vì người giới thiệu nói chuyện rất gần gũi. Chị ấy tạo ra <span class="vocab"><span class="vocab-img">🧑‍🤝‍🧑</span><span class="vocab-text"><span class="vi">sức hút kiểu như một người bạn đồng trang lứa</span><span class="en">peer-like influencer appeal</span></span></span> qua <span class="vocab"><span class="vocab-img">📖</span><span class="vocab-text"><span class="vi">lối kể chuyện cảm xúc, chân thật</span><span class="en">emotionally transparent storytelling</span></span></span>.</p>
@@ -1518,6 +1567,11 @@ body.locked .pw-modal{
   <div class="tab-panel" id="panel-story-finance">
     <div class="story-panel-wrap">
 <section class="story-shell">
+      <div class="story-header">
+        <div class="story-kicker">💰 Finance Story</div>
+        <h2 class="story-title">Bài học nhỏ về tiền trước khi lớn</h2>
+        <p class="story-subtitle">Tiền không chỉ để tiêu, tiền còn để học cách trưởng thành</p>
+      </div>
       <div class="story">
 <p>Khi còn nhỏ, nhiều bạn nghĩ tiền là chuyện của bố mẹ. Chúng ta học Toán, Văn, Anh rất nhiều, nhưng lại ít được học cách dùng tiền trong đời sống thật. Vì vậy, khi bắt đầu có tiền tiêu vặt, nhiều bạn dễ rơi vào <span class="vocab"><span class="vocab-img">❓</span><span class="vocab-text"><span class="vi">hiểu biết tài chính hạn chế</span><span class="en">limited financial literacy</span></span></span> nên không biết nên tiêu, tiết kiệm hay lập kế hoạch như thế nào.</p>
 <p>Một phần vì học sinh thường chưa có nhiều cơ hội tự kiếm tiền. Những <span class="vocab"><span class="vocab-img">💻</span><span class="vocab-text"><span class="vi">cơ hội tạo thu nhập hạn chế</span><span class="en">limited opportunities for income generation</span></span></span> khiến các bạn chưa thật sự hiểu rằng mỗi đồng tiền đều cần thời gian, công sức và kỹ năng để tạo ra.</p>
@@ -1547,6 +1601,17 @@ body.locked .pw-modal{
   <div class="tab-panel" id="panel-story-tourism">
     <div class="story-panel-wrap">
 <section class="story-shell">
+      <div class="story-header">
+        <div class="story-kicker">✈️ Tourism / Travel Story</div>
+        <h2 class="story-title">Sau kỳ thi, Mun muốn đi Huế</h2>
+        <p class="story-subtitle">Đi để nghỉ ngơi, để hiểu văn hóa, và để biết yêu một vùng đất bằng trái tim</p>
+        <div class="story-chip-row">
+          <span class="story-chip">TRAVEL GENTLY</span>
+          <span class="story-chip">LOVE HUE</span>
+          <span class="story-chip">RESPECT CULTURE</span>
+          <span class="story-chip">LEAVE KINDNESS</span>
+        </div>
+      </div>
       <div class="story">
 <p>Những ngày ôn thi vào 10, Mun chăm chỉ đến mức có hôm vừa ăn tối xong đã ngồi vào bàn học. Có lúc mệt, em tự nhủ: "Thi xong, mình muốn được đi Huế." Với Mun, chuyến đi ấy không chỉ là <span class="vocab"><span class="vocab-img">🧳</span><span class="vocab-text"><span class="vi">du lịch và khám phá</span><span class="en">travel and exploration</span></span></span> mà còn là một lời hẹn nhẹ nhàng với chính mình sau những ngày cố gắng.</p>
 <p>Mun tưởng tượng Huế có sông Hương chảy chậm, những con đường xanh, những mái nhà cổ và buổi chiều dịu như một trang vở mới. Em mong được <span class="vocab"><span class="vocab-img">🌿</span><span class="vocab-text"><span class="vi">giải trí và nghỉ dưỡng</span><span class="en">recreation and leisure</span></span></span> bên gia đình, được thở chậm lại sau kỳ thi.</p>
@@ -1574,6 +1639,11 @@ body.locked .pw-modal{
   <div class="tab-panel" id="panel-story-career">
     <div class="story-panel-wrap">
 <section class="story-shell">
+      <div class="story-header">
+        <div class="story-kicker">🧭 Career Choice Story</div>
+        <h2 class="story-title">Tấm bản đồ nghề nghiệp trong thời đại AI</h2>
+        <p class="story-subtitle">Bảo học cách chọn tương lai khi thế giới đang thay đổi quá nhanh</p>
+      </div>
       <div class="story">
 <p>Bảo ngồi trước tờ đăng ký định hướng nghề nghiệp mà thấy lòng mình rối như một cuộn chỉ. Trước đây, em nghĩ <span class="vocab"><span class="vocab-img">🧭</span><span class="vocab-text"><span class="vi">lựa chọn nghề nghiệp</span><span class="en">career choice</span></span></span> chỉ là chọn một ngành học rồi cố gắng đi theo. Nhưng từ khi AI phát triển nhanh, Bảo bắt đầu tự hỏi: "Nghề mình chọn hôm nay, vài năm nữa còn cần con người nhiều không?"</p>
 <p>Bảo nhận ra mình biết quá ít về thế giới nghề nghiệp. Đó là <span class="vocab"><span class="vocab-img">❓</span><span class="vocab-text"><span class="vi">nhận thức nghề nghiệp hạn chế</span><span class="en">limited career awareness</span></span></span> khiến em càng đọc càng hoang mang, càng nghe càng không biết nên bắt đầu từ đâu.</p>
@@ -1606,6 +1676,17 @@ body.locked .pw-modal{
   <div class="tab-panel" id="panel-story-lang">
     <div class="story-panel-wrap">
 <section class="story-shell">
+      <div class="story-header">
+        <div class="story-kicker">🌏 Language Learning / ESL Story</div>
+        <h2 class="story-title">Hai chiếc rễ và một đôi cánh</h2>
+        <p class="story-subtitle">Một câu chuyện về tiếng Anh, AI và việc không quên mình đến từ đâu</p>
+        <div class="story-chip-row">
+          <span class="story-chip">ENGLISH OPENS DOORS</span>
+          <span class="story-chip">AI HELPS</span>
+          <span class="story-chip">CULTURE ROOTS US</span>
+          <span class="story-chip">FLY FAR, STAY TRUE</span>
+        </div>
+      </div>
       <div class="story">
 <p>An từng nghĩ tiếng Anh chủ yếu là một môn học để lấy điểm cao, thi chứng chỉ và làm đẹp hồ sơ. Nhưng trong một buổi học, cô Hạnh nói rằng thế giới đang thay đổi, và <span class="vocab"><span class="vocab-img">🌐</span><span class="vocab-text"><span class="vi">sự thống trị toàn cầu ngày càng tăng của tiếng Anh</span><span class="en">growing global dominance of English</span></span></span> khiến tiếng Anh trở thành một cây cầu quan trọng trong học tập, công việc và giao tiếp quốc tế.</p>
 <p>Cô Hạnh giải thích rằng các <span class="vocab"><span class="vocab-img">🎓</span><span class="vocab-text"><span class="vi">chứng chỉ tiếng Anh</span><span class="en">English-language qualifications</span></span></span> như IELTS hay TOEFL có thể mở thêm cơ hội học tập, vì xã hội đang có <span class="vocab"><span class="vocab-img">📈</span><span class="vocab-text"><span class="vi">nhu cầu tăng cao về khả năng làm việc quốc tế</span><span class="en">increasing demand for international employability</span></span></span> trong nhiều ngành nghề.</p>
@@ -1632,6 +1713,17 @@ body.locked .pw-modal{
   <div class="tab-panel" id="panel-story-skill">
     <div class="story-panel-wrap">
 <section class="story-shell">
+      <div class="story-header">
+        <div class="story-kicker">🌱 Skill Development Story</div>
+        <h2 class="story-title">Gửi tôi của 10 năm sau</h2>
+        <p class="story-subtitle">Một lá thư nhỏ về kỹ năng, sự bền bỉ và khả năng thích nghi</p>
+        <div class="story-chip-row">
+          <span class="story-chip">LEARN DEEPLY</span>
+          <span class="story-chip">ADAPT FAST</span>
+          <span class="story-chip">THINK CLEARLY</span>
+          <span class="story-chip">KEEP GROWING</span>
+        </div>
+      </div>
       <div class="story">
 <p>Gửi tôi của 10 năm sau, hôm nay Minh vừa trở về từ một buổi hướng nghiệp về AI, nghề nghiệp và thế giới lao động đang thay đổi. Lần đầu tiên, Minh hiểu rằng tương lai không chỉ cần chọn đúng ngành, mà còn cần <span class="vocab"><span class="vocab-img">🧭</span><span class="vocab-text"><span class="vi">ra quyết định hướng tới tương lai</span><span class="en">future-oriented decision-making</span></span></span> để mỗi lựa chọn hôm nay không chỉ phục vụ điểm số trước mắt, mà còn giúp mình trưởng thành lâu dài.</p>
 <p>Thầy nói rằng nhiều nghề sẽ thay đổi rất nhanh, một số kỹ năng cũ có thể lỗi thời, nhưng người biết học tiếp sẽ luôn có cơ hội. Vì vậy, Minh muốn hứa với tương lai rằng mình sẽ rèn <span class="vocab"><span class="vocab-img">🌍</span><span class="vocab-text"><span class="vi">khả năng thích nghi tốt hơn với thị trường lao động thay đổi</span><span class="en">greater adaptability toward evolving labor markets</span></span></span> thay vì chỉ mong thế giới đứng yên để mình thấy an toàn.</p>
